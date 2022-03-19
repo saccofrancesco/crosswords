@@ -72,3 +72,10 @@ for claue in words_clauses:
 
 # Deleting the Temporary File
 os.remove("temp.txt")
+
+with open("answers.txt", "w") as file:
+    # Printing teh Results in the Console
+    for key, value in answers.items():
+        p = f"Answer {key}: {value}"
+        print(p)
+        file.write(f"{p}\n")
