@@ -45,3 +45,9 @@ with open("temp.txt", "r") as f:
     for line in f:
         cleaned_line = line.replace(" \n", "")
         words_clauses.append(cleaned_line)
+
+# Dizy Site
+site = "https://www.dizy.com"
+
+# Getting the Query URL
+query = "https://www.dizy.com/it/cruciverba/?q="
