@@ -38,13 +38,13 @@ with open("temp.txt", "w") as f:
     f.write(new_text)
 
 # Clues List
-words_clauses = []
+words_clues = []
 
 # Storing Temporary Words' Clauses
 with open("temp.txt", "r") as f:
     for line in f:
         cleaned_line = line.replace(" \n", "")
-        words_clauses.append(cleaned_line)
+        words_clues.append(cleaned_line)
 
 # Dizy Site
 site = "https://www.dizy.com"
@@ -56,7 +56,7 @@ query = "https://www.dizy.com/it/cruciverba/?q="
 answers = {}
 
 # Getting all the Answer's URL's from Different Sites
-for claue in words_clauses:
+for claue in words_clues:
     splitted = claue.split(" ")
     phrase = " ".join(splitted[1:])
     url = query + phrase
