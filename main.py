@@ -51,3 +51,21 @@ site = "https://www.dizy.com"
 
 # Getting the Query URL
 query = "https://www.dizy.com/it/cruciverba/?q="
+
+# Answer Dictionary
+answers = {}
+
+# Getting all the Answer's URL's from Different Sites
+for claue in words_clauses:
+    splitted = claue.split(" ")
+    phrase = " ".join(splitted[1:])
+    url = query + phrase
+    source = requests.get(url).text
+    soup = BeautifulSoup(source, "html.parser")
+    if ul := soup.find("ul"):
+        href = ul.find("a")
+        link = site + href["href"]
+        source = requests.get(link).text
+        soup = BeautifulSoup(source, "html.parser")
+        answer = soup.find("b").text
+        answers[splitted[0]] = answer
