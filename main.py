@@ -36,3 +36,12 @@ for i in range(len(not_filtered_list)):
 # Writing to a File the Detected Text
 with open("temp.txt", "w") as f:
     f.write(new_text)
+
+# Clues List
+words_clauses = []
+
+# Storing Temporary Words' Clauses
+with open("temp.txt", "r") as f:
+    for line in f:
+        cleaned_line = line.replace(" \n", "")
+        words_clauses.append(cleaned_line)
