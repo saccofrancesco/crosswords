@@ -14,3 +14,6 @@ try:
     path = sys.argv[1]
 except IndexError:
     path = "img/text1.jpg"
+
+# Converting thge Image to Text
+text = pytesseract.image_to_string(PIL.Image.open(path), config=CONFIG)
