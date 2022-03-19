@@ -8,3 +8,9 @@ import sys
 
 # Set Up the Configurations' Options
 CONFIG = r"--psm 6 --oem 3"
+
+# Defining teh Image Path Manually or Via Command Line Arguments
+try:
+    path = sys.argv[1]
+except IndexError:
+    path = "img/text1.jpg"
