@@ -69,3 +69,6 @@ for claue in words_clauses:
         soup = BeautifulSoup(source, "html.parser")
         answer = soup.find("b").text
         answers[splitted[0]] = answer
+
+# Deleting the Temporary File
+os.remove("temp.txt")
