@@ -32,3 +32,7 @@ for i in range(len(not_filtered_list)):
         if not_filtered_list[i].isdigit() and i != 0  and len(not_filtered_list[i]) not in [3, 4]:
             new_text += "\n"
         new_text += f"{not_filtered_list[i]} "
+
+# Writing to a File the Detected Text
+with open("temp.txt", "w") as f:
+    f.write(new_text)
