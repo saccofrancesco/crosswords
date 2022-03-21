@@ -43,7 +43,6 @@ def extractText(config: str, path: str) -> str:
         text = pytesseract.image_to_string(PIL.Image.open(path), config=config)
 
     # Showing a Result Message
-    print("\n")
     console.print("✅ [green]Image Succesfully Processed! Text Extracted![/green]\n")
 
     # Returning the Extracted Text
