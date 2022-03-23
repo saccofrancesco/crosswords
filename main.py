@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from rich.console import Console
 from rich.progress import track
+from rich.table import Table
 import os
 import sys
 
@@ -103,7 +104,7 @@ def getAnswers(cluesList: list) -> dict:
             source = requests.get(link).text
             soup = BeautifulSoup(source, "html.parser")
             answer = soup.find("b").text
-            answers[splitted[0]] = answer
+            answers[cluesList[i]] = answer
 
     # Returning the Answers in a Dictionary Data Structure
     return answers
@@ -111,12 +112,24 @@ def getAnswers(cluesList: list) -> dict:
 # Method for Displaying the Answers
 def showAnswers(answers: dict) -> None:
 
-    # Output Message
-    console.print("[blue]###### Answer List ######[/blue]")
+    # Creating the Table
+    table = Table()
 
-    # Printing the Results in the Console
+    # Creating the Columns
+    table.add_column("Number", style = "cyan")
+    table.add_column("Clue", style = "magenta")
+    table.add_column("Answer", style = "green")
+
+    # Adding the Rows
     for key, value in answers.items():
-        console.print(f"[yellow]Answer N°{key}[/yellow]: [green]{value}[/green]")
+        splitted = key.split(" ")
+        n = splitted[0]
+        clue = "".join(f'{word} ' for word in splitted[1:])
+        table.add_row(n, clue, value)
+
+    # Printing the Table
+    console.print(table)
+    print("\n")
 
 # Defined Main Instance of the Program
 if __name__ == "__main__":
@@ -143,4 +156,5 @@ if __name__ == "__main__":
     # Deleting Temporary Files
     os.remove("temp.txt")
 
+    # Showing the Answers 
     showAnswers(answers)
