@@ -19,6 +19,8 @@ site = "https://www.dizy.com"
 query = "https://www.dizy.com/it/cruciverba/?q="
 
 # Defining the Initialization Method
+
+
 def init() -> tuple:
 
     # Set Up the Configurations' Options
@@ -34,6 +36,8 @@ def init() -> tuple:
     return CONFIG, path
 
 # Extracting Text form the Processed Image
+
+
 def extractText(config: str, path: str) -> str:
 
     # Setting Up the Animation
@@ -44,12 +48,15 @@ def extractText(config: str, path: str) -> str:
         text = pytesseract.image_to_string(PIL.Image.open(path), config=config)
 
     # Showing a Result Message
-    console.print("✅ [green]Image Succesfully Processed! Text Extracted![/green]\n")
+    console.print(
+        "✅ [green]Image Succesfully Processed! Text Extracted![/green]\n")
 
     # Returning the Extracted Text
     return text
 
 # Method for Cleaning the Extracted Data
+
+
 def cleanImageData(text: str) -> str:
 
     # String Manipulation for Clenaing the Data
@@ -62,8 +69,9 @@ def cleanImageData(text: str) -> str:
     not_filtered_list = text.split()
     new_text = ""
     for i in range(len(not_filtered_list)):
-        if not_filtered_list[i] not in ["", "__", "_", "\n"]:    
-            if not_filtered_list[i].isdigit() and i != 0  and len(not_filtered_list[i]) not in [3, 4]:
+        if not_filtered_list[i] not in ["", "__", "_", "\n"]:
+            if not_filtered_list[i].isdigit() and i != 0 and len(
+                    not_filtered_list[i]) not in [3, 4]:
                 new_text += "\n"
             new_text += f"{not_filtered_list[i]} "
 
@@ -71,6 +79,8 @@ def cleanImageData(text: str) -> str:
     return new_text
 
 # Method for Storing the Extracted Answers' Clues
+
+
 def getClues(filePath: str) -> list:
 
     # Clues List
@@ -86,13 +96,16 @@ def getClues(filePath: str) -> list:
     return words_clues
 
 # Method for Getting the Answer Using the Extracted Clues
+
+
 def getAnswers(cluesList: list) -> dict:
 
     # Answer Dictionary
     answers = {}
 
     # Getting all the Answer's URL's from Different Sites
-    for i in track(range(len(cluesList)), description = "[yellow]Parsing Answers...[/yellow]\n"):
+    for i in track(range(len(cluesList)),
+                   description="[yellow]Parsing Answers...[/yellow]\n"):
         splitted = cluesList[i].split(" ")
         phrase = " ".join(splitted[1:])
         url = query + phrase
@@ -110,15 +123,17 @@ def getAnswers(cluesList: list) -> dict:
     return answers
 
 # Method for Displaying the Answers
+
+
 def showAnswers(answers: dict) -> None:
 
     # Creating the Table
     table = Table()
 
     # Creating the Columns
-    table.add_column("Number", style = "cyan")
-    table.add_column("Clue", style = "magenta")
-    table.add_column("Answer", style = "green")
+    table.add_column("Number", style="cyan")
+    table.add_column("Clue", style="magenta")
+    table.add_column("Answer", style="green")
 
     # Adding the Rows
     for key, value in answers.items():
@@ -130,6 +145,7 @@ def showAnswers(answers: dict) -> None:
     # Printing the Table
     console.print(table)
     print("\n")
+
 
 # Defined Main Instance of the Program
 if __name__ == "__main__":
@@ -156,5 +172,5 @@ if __name__ == "__main__":
     # Deleting Temporary Files
     os.remove("temp.txt")
 
-    # Showing the Answers 
+    # Showing the Answers
     showAnswers(answers)
