@@ -1,4 +1,4 @@
-# Risolutore di cruciverba
+# Risolutore di Cruciverba
 Questo è uno script per ottenere le risposte ad un cruciverba, usando pyTesseract e il Web Scraping
 
 ## Impostare
@@ -9,7 +9,7 @@ git clone https://github.com/TonicStark/Crossword-Solver.git
 
 Quindi installa le dipendenze in un virtualenv, puoi crearne uno tramite `python -m venv <name of the virtualenv>`, con:
 ```python
-pip install -r requisiti.txt
+pip install -r requirements.txt
 ```
 
 Quindi, devi installare quella che viene chiamata **Tesseract**, una libreria per il riconoscimento del testo, in particolare **OCR**. Puoi cercarlo su Github e seguire le istruzioni sul loro Repo. Questo è il [link](https://github.com/tesseract-ocr/tesseract).
