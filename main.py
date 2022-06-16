@@ -10,54 +10,50 @@ import os
 import sys
 
 # Console Object
-console = Console()
+CONSOLE = Console()
 
 # Dizy Site
-site = "https://www.dizy.com"
+SITE = "https://www.dizy.com"
 
 # Query URL
-query = "https://www.dizy.com/it/cruciverba/?q="
+QUERY = "https://www.dizy.com/it/cruciverba/?q="
 
 # Defining the Initialization Method
-
-
-def init() -> tuple:
+def init() -> dict:
 
     # Set Up the Configurations' Options
     CONFIG = r"--psm 6 --oem 3"
 
     # Defining the Image Path Manually or Via Command Line Arguments
     try:
-        path = sys.argv[1]
+        PATH = sys.argv[1]
     except IndexError:
-        path = "img/text1.jpg"
+        PATH = "img/text1.jpg"
 
     # Returning the Configurations and the Image Path
-    return CONFIG, path
+    return {
+        "config": CONFIG,
+        "path": PATH}
 
 # Extracting Text form the Processed Image
-
-
-def extractText(config: str, path: str) -> str:
+def extract_text(config: str, path: str) -> str:
 
     # Setting Up the Animation
     print("\n")
-    with console.status("🔍 [blue]Extracting Text from the Image...[/blue]"):
+    with CONSOLE.status("🔍 [blue]Extracting Text from the Image...[/blue]"):
 
         # Converting the Image to Text
         text = pytesseract.image_to_string(PIL.Image.open(path), config=config)
 
     # Showing a Result Message
-    console.print(
+    CONSOLE.print(
         "✅ [green]Image Succesfully Processed! Text Extracted![/green]\n")
 
     # Returning the Extracted Text
     return text
 
 # Method for Cleaning the Extracted Data
-
-
-def cleanImageData(text: str) -> str:
+def clean_image_data(text: str) -> str:
 
     # String Manipulation for Clenaing the Data
     text = text.replace("ORIZZONTALI", "")
@@ -79,9 +75,7 @@ def cleanImageData(text: str) -> str:
     return new_text
 
 # Method for Storing the Extracted Answers' Clues
-
-
-def getClues(filePath: str) -> list:
+def get_clues(filePath: str) -> list:
 
     # Clues List
     words_clues = []
@@ -96,9 +90,7 @@ def getClues(filePath: str) -> list:
     return words_clues
 
 # Method for Getting the Answer Using the Extracted Clues
-
-
-def getAnswers(cluesList: list) -> dict:
+def get_answers(cluesList: list) -> dict:
 
     # Answer Dictionary
     answers = {}
@@ -108,12 +100,12 @@ def getAnswers(cluesList: list) -> dict:
                    description="[yellow]Parsing Answers...[/yellow]\n"):
         splitted = cluesList[i].split(" ")
         phrase = " ".join(splitted[1:])
-        url = query + phrase
+        url = QUERY + phrase
         source = requests.get(url).text
         soup = BeautifulSoup(source, "html.parser")
         if ul := soup.find("ul"):
             href = ul.find("a")
-            link = site + href["href"]
+            link = SITE + href["href"]
             source = requests.get(link).text
             soup = BeautifulSoup(source, "html.parser")
             answer = soup.find("b").text
@@ -123,9 +115,7 @@ def getAnswers(cluesList: list) -> dict:
     return answers
 
 # Method for Displaying the Answers
-
-
-def showAnswers(answers: dict) -> None:
+def show_answers(answers: dict) -> None:
 
     # Creating the Table
     table = Table()
@@ -143,7 +133,7 @@ def showAnswers(answers: dict) -> None:
         table.add_row(n, clue, value)
 
     # Printing the Table
-    console.print(table)
+    CONSOLE.print(table)
     print("\n")
 
 
@@ -151,26 +141,26 @@ def showAnswers(answers: dict) -> None:
 if __name__ == "__main__":
 
     # Running the Initialization
-    initialization = init()
+    INIT = init()
 
     # Running the Image's Analisy
-    text = extractText(initialization[0], initialization[1])
+    text = extract_text(INIT[0], INIT[1])
 
     # Cleaning the Text
-    text = cleanImageData(text)
+    text = clean_image_data(text)
 
     # Writing to a File the Detected Text
     with open("temp.txt", "w") as f:
         f.write(text)
 
     # Getting the Clues
-    clues_list = getClues("temp.txt")
+    CLUES = get_clues("temp.txt")
 
     # Getting the Answers
-    answers = getAnswers(clues_list)
+    ANSWERS = get_answers(CLUES)
 
     # Deleting Temporary Files
     os.remove("temp.txt")
 
     # Showing the Answers
-    showAnswers(answers)
+    show_answers(ANSWERS)
