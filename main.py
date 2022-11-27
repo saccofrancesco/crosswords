@@ -144,7 +144,7 @@ if __name__ == "__main__":
     INIT = init()
 
     # Running the Image's Analisy
-    text = extract_text(INIT[0], INIT[1])
+    text = extract_text(INIT["config"], INIT["path"])
 
     # Cleaning the Text
     text = clean_image_data(text)
