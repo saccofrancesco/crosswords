@@ -18,7 +18,7 @@ Quindi aggiungi la cartella di installazione al tuo **PERCORSO DI SISTEMA** altr
 ## Come funziona
 Per eseguire il programma, devi semplicemente eseguire il file `main.py`. Puoi eseguirlo così com'è e, per impostazione predefinita, utilizzerà una delle sei immagini di prova nella cartella `/img`, in particolare l'immagine `/img/text1.jpg`. Se desideri utilizzare un'immagine diversa, puoi modificare il codice sorgente qui:
 
-!["code"](..\img\code.png)
+![code](../img/code.png)
 
 oppure puoi eseguire il programma con un flag, un argomento della riga di comando. In particolare, questo comando, `python main.py <percorso della tua immagine>`. Questo prenderà l'immagine che hai selezionato e la userà per l'analisi.
 
