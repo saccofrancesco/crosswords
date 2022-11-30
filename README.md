@@ -18,7 +18,7 @@ Then add the Installation Folder to Your **SYSTEM PATH** else, the script **won'
 ## How It Works
 To run the program, you simply have to run the `main.py` file. You can run it as it is and, by default, it will use one of the six test images in the `/img` folder, specifically the `/img/text1.jpg` image. If you want to use a different image, you can modify the source code here:
 
-!["code"](img\code.png)
+![code](img/code.png)
 
 or, you can run the program with one flag, one command-line argument. Specifically, this command, `python main.py <path to your image>`. This will take the image you selected and use it for the analysis.
 
