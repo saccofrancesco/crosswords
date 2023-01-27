@@ -4,7 +4,7 @@ This is a script for getting the Answers to a Crossword Puzzle, using pyTesserac
 ## Set Up
 Download the ZIP Folder, or Clone the Repository with:
 ```
-git clone https://github.com/TonicStark/Crossword-Solver.git
+git clone https://github.com/TonicStark/crosswords-solver.git
 ```
 
 Then install the dependencies in a virtualenv, you can create one via `python -m venv <name of the virtualenv>`, with:
