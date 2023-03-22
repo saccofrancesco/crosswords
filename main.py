@@ -18,22 +18,11 @@ app.title("Crossword Solver")
 title = customtkinter.CTkLabel(app, text="Crossword Solver", font=("Berlin Sans FB", 30))
 title.pack(pady=15)
 
-# Defining the Initialization Method
-def init() -> dict:
+# Saving the Path
+filepath = tkinter.StringVar(value="Selected Path: None")
 
-    # Set Up the Configurations' Options
-    CONFIG = r"--psm 6 --oem 3"
-
-    # Defining the Image Path Manually or Via Command Line Arguments
-    try:
-        PATH = sys.argv[1]
-    except IndexError:
-        PATH = "img/text1.jpg"
-
-    # Returning the Configurations and the Image Path
-    return {
-        "config": CONFIG,
-        "path": PATH}
+# Saving Clues' Answers
+clues_answers = tkinter.StringVar(value="")
 
 # Extracting Text form the Processed Image
 def extract_text(config: str, path: str) -> str:
