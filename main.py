@@ -116,31 +116,6 @@ def solve() -> str:
     # Setting the Text to the Extracted Answers
     clues_answers.set(generic_text)
 
-
-# Defined Main Instance of the Program
-if __name__ == "__main__":
-
-    # Running the Initialization
-    INIT = init()
-
-    # Running the Image's Analisy
-    text = extract_text(INIT["config"], INIT["path"])
-
-    # Cleaning the Text
-    text = clean_image_data(text)
-
-    # Writing to a File the Detected Text
-    with open("temp.txt", "w") as f:
-        f.write(text)
-
-    # Getting the Clues
-    CLUES = get_clues("temp.txt")
-
-    # Getting the Answers
-    ANSWERS = get_answers(CLUES)
-
-    # Deleting Temporary Files
-    os.remove("temp.txt")
-
-    # Showing the Answers
-    show_answers(ANSWERS)
+# Action Button
+action_btn = customtkinter.CTkButton(app, text="Solve Crossword", font=("Berlin Sans FB", 15), command=solve)
+action_btn.pack(pady=10)
