@@ -2,6 +2,7 @@
 This is a script for getting the Answers to a Crossword Puzzle, using pyTesseract and Web Scraping
 
 ## Set Up
+### Build by Yourself
 Download the ZIP Folder, or Clone the Repository with:
 ```
 git clone https://github.com/TonicStark/crosswords-solver.git
@@ -14,6 +15,25 @@ pip install -r requirements.txt
 
 Then, you need to install what is called **Tesseract**, a library for text recognition, specifically, **OCR**. You can search it on Github and follow the instructions over their Repo. This is the [link](https://github.com/tesseract-ocr/tesseract).
 Then add the Installation Folder to Your **SYSTEM PATH** else, the script **won't work!**. [Here](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/) there is a guide.
+
+In the *virtualenv*, run the following command:
+```
+pyinstaller --onefile .\autopip.py
+```
+this will **build** the `autopip.py` file, as a **single** *executable*.
+When you finish the build process, you should a *repo* like this:
+```
+.
+└── crossword-solver/
+    ├── build
+    ├── dist
+    ├── img
+    ├── .gitignore
+    ├── autopip.py
+    ├── autopip.spec
+    ├── README.md
+    └── requirements.txt
+```
 
 ## How It Works
 To run the program, you simply have to run the `main.py` file. You can run it as it is and, by default, it will use one of the six test images in the `/img` folder, specifically the `/img/text1.jpg` image. If you want to use a different image, you can modify the source code here:
