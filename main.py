@@ -40,6 +40,10 @@ def get_file() -> None:
 choosefile_btn = customtkinter.CTkButton(app, text="Choose an Img File", font=("Berlin Sans FB", 15), command=get_file)
 choosefile_btn.pack(pady=10)
 
+# File Label
+file_label = customtkinter.CTkLabel(app, textvariable=filepath, font=("Berlin Sans FB", 20))
+file_label.pack(pady=10)
+
 # Method for Cleaning the Extracted Data
 def clean_image_data(text: str) -> str:
 
