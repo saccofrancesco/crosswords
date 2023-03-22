@@ -44,8 +44,22 @@ choosefile_btn.pack(pady=10)
 file_label = customtkinter.CTkLabel(app, textvariable=filepath, font=("Berlin Sans FB", 20))
 file_label.pack(pady=10)
 
-# Method for Cleaning the Extracted Data
-def clean_image_data(text: str) -> str:
+def solve() -> str:
+
+    # Using Global defined Filepath
+    global filepath
+
+    # Dizy Site
+    SITE = "https://www.dizy.com"
+
+    # Query URL
+    QUERY = "https://www.dizy.com/it/cruciverba/?q="
+
+    # Set Up the Configurations' Options
+    CONFIG = r"--psm 6 --oem 3"
+
+    # Converting the Image to Text
+    text = pytesseract.image_to_string(PIL.Image.open(filepath.get().split(" ")[2]), config=CONFIG)
 
     # String Manipulation for Clenaing the Data
     text = text.replace("ORIZZONTALI", "")
@@ -63,35 +77,23 @@ def clean_image_data(text: str) -> str:
                 new_text += "\n"
             new_text += f"{not_filtered_list[i]} "
 
-    # Returning the New Cleaned Text
-    return new_text
+    # Saving the Uncleared List
+    uncleared_clues = new_text.split("\n")
 
-# Method for Storing the Extracted Answers' Clues
-def get_clues(filePath: str) -> list:
+    # Creating the Cleared List
+    cleared_clues = []
 
-    # Clues List
-    words_clues = []
+    # Deleting Numbers
+    for i in range(len(uncleared_clues)):
+        splitted = uncleared_clues[i].split(" ")
+        phrase = " ".join(splitted[1:])
+        cleared_clues.append(phrase)
 
-    # Storing Temporary Words' Clues
-    with open(filePath, "r") as f:
-        for line in f:
-            cleaned_line = line.replace(" \n", "")
-            words_clues.append(cleaned_line)
-
-    # Returning the Created Clues' List
-    return words_clues
-
-# Method for Getting the Answer Using the Extracted Clues
-def get_answers(cluesList: list) -> dict:
-
-    # Answer Dictionary
+    # Creating the Answers Dictionary
     answers = {}
 
-    # Getting all the Answer's URL's from Different Sites
-    for i in track(range(len(cluesList)),
-                   description="[yellow]Parsing Answers...[/yellow]\n"):
-        splitted = cluesList[i].split(" ")
-        phrase = " ".join(splitted[1:])
+    # Parsing the Answers
+    for i, phrase in enumerate(cleared_clues):
         url = QUERY + phrase
         source = requests.get(url).text
         soup = BeautifulSoup(source, "html.parser")
@@ -101,32 +103,18 @@ def get_answers(cluesList: list) -> dict:
             source = requests.get(link).text
             soup = BeautifulSoup(source, "html.parser")
             answer = soup.find("b").text
-            answers[cluesList[i]] = answer
+            answers[cleared_clues[i]] = answer
 
-    # Returning the Answers in a Dictionary Data Structure
-    return answers
-
-# Method for Displaying the Answers
-def show_answers(answers: dict) -> None:
-
-    # Creating the Table
-    table = Table()
-
-    # Creating the Columns
-    table.add_column("Number", style="cyan")
-    table.add_column("Clue", style="magenta")
-    table.add_column("Answer", style="green")
-
-    # Adding the Rows
+    # Using Pre Created Answers Text
+    global clues_answers
+    generic_text = ""
+    
+    # Creating a Text Using Numbers and Answers
     for key, value in answers.items():
-        splitted = key.split(" ")
-        n = splitted[0]
-        clue = "".join(f'{word} ' for word in splitted[1:])
-        table.add_row(n, clue, value)
+        generic_text += f"{key}: {value}\n"
 
-    # Printing the Table
-    CONSOLE.print(table)
-    print("\n")
+    # Setting the Text to the Extracted Answers
+    clues_answers.set(generic_text)
 
 
 # Defined Main Instance of the Program
