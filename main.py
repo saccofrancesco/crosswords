@@ -14,6 +14,10 @@ app = customtkinter.CTk()
 app.geometry("600x700")
 app.title("Crossword Solver")
 
+# Creating the Title
+title = customtkinter.CTkLabel(app, text="Crossword Solver", font=("Berlin Sans FB", 30))
+title.pack(pady=15)
+
 # Defining the Initialization Method
 def init() -> dict:
 
