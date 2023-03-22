@@ -1,13 +1,13 @@
-# Importing Libraries
+# Importing GUI LIbraries
+import customtkinter
+import tkinter
+import easygui
+
+# Importing OCR and Crossword Solver Libraries
+from bs4 import BeautifulSoup
 import pytesseract
 import PIL.Image
 import requests
-from bs4 import BeautifulSoup
-from rich.console import Console
-from rich.progress import track
-from rich.table import Table
-import os
-import sys
 
 # Console Object
 CONSOLE = Console()
