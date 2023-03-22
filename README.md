@@ -18,29 +18,28 @@ Then add the Installation Folder to Your **SYSTEM PATH** else, the script **won'
 
 In the *virtualenv*, run the following command:
 ```
-pyinstaller --onefile .\autopip.py
+pyinstaller --onefile --noconsole .\main.py
 ```
-this will **build** the `autopip.py` file, as a **single** *executable*.
+this will **build** the `main.py` file, as a **single** *executable*.
 When you finish the build process, you should a *repo* like this:
 ```
 .
 └── crossword-solver/
     ├── build
-    ├── dist
-    ├── img
+    ├── dist/
+    │   └── main.exe
+    ├── README Translation
+    ├── venv
     ├── .gitignore
-    ├── autopip.py
-    ├── autopip.spec
+    ├── main.py
+    ├── main.spec
     ├── README.md
     └── requirements.txt
 ```
+Inside the `dist/` you should have a **file**, `main.exe` which you can **execute** as a single program, without having to *activate* the *virtualenv* each time.
 
-## How It Works
-To run the program, you simply have to run the `main.py` file. You can run it as it is and, by default, it will use one of the six test images in the `/img` folder, specifically the `/img/text1.jpg` image. If you want to use a different image, you can modify the source code here:
-
-![code](img/code.png)
-
-or, you can run the program with one flag, one command-line argument. Specifically, this command, `python main.py <path to your image>`. This will take the image you selected and use it for the analysis.
+## Download (Windows only)
+Else, you can *download* in the **Release** section, the *builded* file.
 
 # Start the Script
 Now that you know how to run the program, you can simply do it. **Happy Solving!**

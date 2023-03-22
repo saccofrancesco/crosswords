@@ -1,26 +1,45 @@
-# Risolutore di Cruciverba
-Questo è uno script per ottenere le risposte ad un cruciverba, usando pyTesseract e il Web Scraping
+# Crossword Solver
+Questo è uno script per ottenere le risposte a un cruciverba, utilizzando pyTesseract e Web Scraping
 
-## Impostare
+## Set Up
+### Compilare da Te
 Scarica la cartella ZIP o clona il repository con:
 ```
-git clone https://github.com/TonicStark/crosswords-solver.git
+clone di git https://github.com/TonicStark/crosswords-solver.git
 ```
 
-Quindi installa le dipendenze in un virtualenv, puoi crearne uno tramite `python -m venv <name of the virtualenv>`, con:
+Quindi installa le dipendenze in un virtualenv, puoi crearne uno tramite `python -m venv <nome del virtualenv>`, con:
 ```python
-pip install -r requirements.txt
+pip install -r requisiti.txt
 ```
 
-Quindi, devi installare quella che viene chiamata **Tesseract**, una libreria per il riconoscimento del testo, in particolare **OCR**. Puoi cercarlo su Github e seguire le istruzioni sul loro Repo. Questo è il [link](https://github.com/tesseract-ocr/tesseract).
+Quindi, è necessario installare quello che viene chiamato **Tesseract**, una libreria per il riconoscimento del testo, in particolare, **OCR**. Puoi cercarlo su Github e seguire le istruzioni sul loro Repo. Questo è il [link](https://github.com/tesseract-ocr/tesseract).
 Quindi aggiungi la cartella di installazione al tuo **PERCORSO DI SISTEMA** altrimenti lo script **non funzionerà!**. [Qui](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/) c'è una guida.
 
-## Come funziona
-Per eseguire il programma, devi semplicemente eseguire il file `main.py`. Puoi eseguirlo così com'è e, per impostazione predefinita, utilizzerà una delle sei immagini di prova nella cartella `/img`, in particolare l'immagine `/img/text1.jpg`. Se desideri utilizzare un'immagine diversa, puoi modificare il codice sorgente qui:
+Nel *virtualenv*, esegui il seguente comando:
+```
+pyinstaller --onefile --noconsole .\main.py
+```
+questo **compilerà** il file `main.py`, come un **singolo** *eseguibile*.
+Quando finisci il processo di compilazione, dovresti avere un *repo* come questo:
+```
+.
+└── crossword-solver/
+    ├── build
+    ├── dist/
+    │   └── main.exe
+    ├── README Translation
+    ├── venv
+    ├── .gitignore
+    ├── main.py
+    ├── main.spec
+    ├── README.md
+    └── requirements.txt
+```
+All'interno di `dist/` dovresti avere un **file**, `main.exe` che puoi **eseguire** come un singolo programma, senza dover *attivare* il *virtualenv* ogni volta.
 
-![code](../img/code.png)
-
-oppure puoi eseguire il programma con un flag, un argomento della riga di comando. In particolare, questo comando, `python main.py <percorso della tua immagine>`. Questo prenderà l'immagine che hai selezionato e la userà per l'analisi.
+## Scarica (solo Windows)
+Altrimenti, puoi *scaricare* nella sezione **Release**, il file *compilato*.
 
 # Avvia lo script
-Ora che sai come eseguire il programma, puoi semplicemente farlo. **Buona risoluzione!**
+Ora che sai come eseguire il programma, puoi semplicemente farlo. **Buona soluzione!**
