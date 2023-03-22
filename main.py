@@ -24,22 +24,17 @@ filepath = tkinter.StringVar(value="Selected Path: None")
 # Saving Clues' Answers
 clues_answers = tkinter.StringVar(value="")
 
-# Extracting Text form the Processed Image
-def extract_text(config: str, path: str) -> str:
+# Function to get the Path
+def get_file() -> None:
 
-    # Setting Up the Animation
-    print("\n")
-    with CONSOLE.status("🔍 [blue]Extracting Text from the Image...[/blue]"):
+    # Asking the Filepath using a GUI
+    global filepath
+    path = easygui.fileopenbox()
 
-        # Converting the Image to Text
-        text = pytesseract.image_to_string(PIL.Image.open(path), config=config)
-
-    # Showing a Result Message
-    CONSOLE.print(
-        "✅ [green]Image Succesfully Processed! Text Extracted![/green]\n")
-
-    # Returning the Extracted Text
-    return text
+    # Checking if the Selected Path is valid
+    splitted_path = path.split("\\")[-1].split(".")[1]
+    if splitted_path in ["jpg", "png", "gif", "bmp", "tiff"]:
+        filepath.set(f"Selected Path: {path}")
 
 # Method for Cleaning the Extracted Data
 def clean_image_data(text: str) -> str:
