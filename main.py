@@ -119,3 +119,7 @@ def solve() -> str:
 # Action Button
 action_btn = customtkinter.CTkButton(app, text="Solve Crossword", font=("Berlin Sans FB", 15), command=solve)
 action_btn.pack(pady=10)
+
+# Answers Label
+answers_label = customtkinter.CTkLabel(app, textvariable=clues_answers, font=("Berlin Sans FB", 14))
+answers_label.pack(pady=10)
