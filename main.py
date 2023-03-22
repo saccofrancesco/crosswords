@@ -9,14 +9,10 @@ import pytesseract
 import PIL.Image
 import requests
 
-# Console Object
-CONSOLE = Console()
-
-# Dizy Site
-SITE = "https://www.dizy.com"
-
-# Query URL
-QUERY = "https://www.dizy.com/it/cruciverba/?q="
+# Creating the App object
+app = customtkinter.CTk()
+app.geometry("600x700")
+app.title("Crossword Solver")
 
 # Defining the Initialization Method
 def init() -> dict:
