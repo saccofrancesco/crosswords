@@ -36,6 +36,10 @@ def get_file() -> None:
     if splitted_path in ["jpg", "png", "gif", "bmp", "tiff"]:
         filepath.set(f"Selected Path: {path}")
 
+# Creating the Choosefile Button
+choosefile_btn = customtkinter.CTkButton(app, text="Choose an Img File", font=("Berlin Sans FB", 15), command=get_file)
+choosefile_btn.pack(pady=10)
+
 # Method for Cleaning the Extracted Data
 def clean_image_data(text: str) -> str:
 
