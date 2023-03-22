@@ -123,3 +123,6 @@ action_btn.pack(pady=10)
 # Answers Label
 answers_label = customtkinter.CTkLabel(app, textvariable=clues_answers, font=("Berlin Sans FB", 14))
 answers_label.pack(pady=10)
+
+# Running the UI
+app.mainloop()
