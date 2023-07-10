@@ -1,48 +1,9 @@
-# Importing GUI LIbraries
-import customtkinter
-import tkinter
-import easygui
-
-# Importing OCR and Crossword Solver Libraries
+# Importing Libraries
 from bs4 import BeautifulSoup
 import pytesseract
 import PIL.Image
 import requests
-
-# Creating the App object
-app = customtkinter.CTk()
-app.geometry("600x700")
-app.title("Crossword Solver")
-
-# Creating the Title
-title = customtkinter.CTkLabel(app, text="Crossword Solver", font=("Berlin Sans FB", 30))
-title.pack(pady=15)
-
-# Saving the Path
-filepath = tkinter.StringVar(value="Selected Path: None")
-
-# Saving Clues' Answers
-clues_answers = tkinter.StringVar(value="")
-
-# Function to get the Path
-def get_file() -> None:
-
-    # Asking the Filepath using a GUI
-    global filepath
-    path = easygui.fileopenbox()
-
-    # Checking if the Selected Path is valid
-    splitted_path = path.split("\\")[-1].split(".")[1]
-    if splitted_path in ["jpg", "png", "gif", "bmp", "tiff"]:
-        filepath.set(f"Selected Path: {path}")
-
-# Creating the Choosefile Button
-choosefile_btn = customtkinter.CTkButton(app, text="Choose an Img File", font=("Berlin Sans FB", 15), command=get_file)
-choosefile_btn.pack(pady=10)
-
-# File Label
-file_label = customtkinter.CTkLabel(app, textvariable=filepath, font=("Berlin Sans FB", 20))
-file_label.pack(pady=10)
+import streamlit as st
 
 def solve() -> str:
 
@@ -105,19 +66,17 @@ def solve() -> str:
             answer = soup.find("b").text
             answers[cleared_clues[i]] = answer
 
-    # Using Pre Created Answers Text
-    global clues_answers
-    generic_text = "".join(f"{key}: {value}\n" for key, value in answers.items())
-    # Setting the Text to the Extracted Answers
-    clues_answers.set(generic_text)
+# Main program
+if __name__ == "__main__":
 
-# Action Button
-action_btn = customtkinter.CTkButton(app, text="Solve Crossword", font=("Berlin Sans FB", 15), command=solve)
-action_btn.pack(pady=10)
+    # Modifiyng App name and icon
+    st.set_page_config(
+        page_title='Crossword Solver',
+        page_icon="favicon.ico",
+        layout="centered")
 
-# Answers Label
-answers_label = customtkinter.CTkLabel(app, textvariable=clues_answers, font=("Berlin Sans FB", 14))
-answers_label.pack(pady=10)
+    # Title of the Program
+    st.title("Crossword Solver")
 
-# Running the UI
-app.mainloop()
+    # Creating a Camera input to take photos
+    image = st.camera_input(".", label_visibility="hidden")
