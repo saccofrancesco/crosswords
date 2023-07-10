@@ -107,12 +107,7 @@ def solve() -> str:
 
     # Using Pre Created Answers Text
     global clues_answers
-    generic_text = ""
-    
-    # Creating a Text Using Numbers and Answers
-    for key, value in answers.items():
-        generic_text += f"{key}: {value}\n"
-
+    generic_text = "".join(f"{key}: {value}\n" for key, value in answers.items())
     # Setting the Text to the Extracted Answers
     clues_answers.set(generic_text)
 
