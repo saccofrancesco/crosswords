@@ -57,6 +57,34 @@ def clean_and_split_clues(text: str) -> list:
 
     return cleared_clues
 
+# Get site content
+def get_site_content(url: str) -> str:
+
+    # Requesting the site source code
+    source = requests.get(url).text
+    
+    return BeautifulSoup(source, "html.parser")
+
+def solve_single_clue(clue: str) -> str:
+
+    # Request the clue via querying
+    url = QUERY + clue
+    soup = get_site_content(url)
+
+    # Find the answer in the returned page
+    ul = soup.find("ul")
+    if ul is not None:
+        href = ul.find("a")
+        if href is not None:
+            link = SITE + href["href"]
+            soup = get_site_content(link)
+
+            table = soup.find("table")
+            if table is not None:
+                answer = table.find("b")
+
+    return answer
+
 # Solve the clues scraping on the clues site, pairing the answers
 
 
@@ -72,23 +100,9 @@ def solve_clues(clues: list, bar=None) -> dict:
             increment += add
             bar.progress(increment, "Risolvendo le domande...")
 
-        url = QUERY + phrase
-        source = requests.get(url).text
-        soup = BeautifulSoup(source, "html.parser")
-
-        ul = soup.find("ul")
-        if ul is not None:
-            href = ul.find("a")
-            if href is not None:
-                link = SITE + href["href"]
-                source = requests.get(link).text
-                soup = BeautifulSoup(source, "html.parser")
-
-                table = soup.find("table")
-                if table is not None:
-                    answer = table.find("b")
-                    if answer is not None:
-                        answers[clues[i]] = answer.text
+        answer = solve_single_clue(phrase)
+        if answer is not None:
+            answers[clues[i]] = answer.text
 
     if bar is not None:
         bar.progress(100, "Finito!")
