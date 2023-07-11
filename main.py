@@ -82,8 +82,9 @@ def solve_single_clue(clue: str) -> str:
             table = soup.find("table")
             if table is not None:
                 answer = table.find("b")
-
-    return answer
+    
+    if answer is not None:
+        return answer
 
 # Solve the clues scraping on the clues site, pairing the answers
 
@@ -101,8 +102,7 @@ def solve_clues(clues: list, bar=None) -> dict:
             bar.progress(increment, "Risolvendo le domande...")
 
         answer = solve_single_clue(phrase)
-        if answer is not None:
-            answers[clues[i]] = answer.text
+        answers[clues[i]] = answer.text
 
     if bar is not None:
         bar.progress(100, "Finito!")
