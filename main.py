@@ -4,6 +4,7 @@ import pytesseract
 import PIL.Image
 import requests
 import streamlit as st
+import math
 
 # Set Up the Configurations' Options
 CONFIG = r"--psm 6 --oem 3"
@@ -15,7 +16,7 @@ SITE = "https://www.dizy.com"
 QUERY = "https://www.dizy.com/it/cruciverba/?q="
 
 # Transform and analyze the image to extract text
-def img_to_text(image) -> str:
+def img_to_text(image: bytes) -> str:
 
     return pytesseract.image_to_string(PIL.Image.open(image), config=CONFIG)
 
@@ -53,13 +54,19 @@ def clean_and_split_clues(text: str) -> list:
     return cleared_clues
 
 # Solve the clues scraping on the clues site, pairing the answers
-def solve_clues(clues: list) -> dict:
+def solve_clues(clues: list, bar) -> dict:
 
     # Creating the Answers Dictionary
     answers = {}
 
+    # Var for the progress bar
+    increment = 0
+    add = 100 // math.ceil(len(clues))
+
     # Parsing the Answers
     for i, phrase in enumerate(clues):
+        increment += add
+        bar.progress(increment, "Resolving Clues...")
         url = QUERY + phrase
         source = requests.get(url).text
         soup = BeautifulSoup(source, "html.parser")
@@ -68,9 +75,12 @@ def solve_clues(clues: list) -> dict:
             link = SITE + href["href"]
             source = requests.get(link).text
             soup = BeautifulSoup(source, "html.parser")
-            answer = soup.find("b").text
+            table = soup.find("table")
+            answer = table.find("b").text
             answers[clues[i]] = answer
 
+    # Concluding progress bar "progress"
+    bar.progress(100, "Finished!")
     return answers
 
 # Main program
@@ -87,3 +97,19 @@ if __name__ == "__main__":
 
     # Creating a Camera input to take photos
     image = st.camera_input(".", label_visibility="hidden")
+
+    # Check if an image is being inserted
+    if image is not None:
+
+        with st.spinner("Extracting text..."):
+            # Extract text from the image
+            text = img_to_text(image)
+
+            # Find the clues
+            clues = clean_and_split_clues(text)
+
+        # Creating a progress bar
+        bar = st.progress(0, "Resolving Clues...")
+
+        # Finding the clue's answers
+        answers = solve_clues(clues, bar)
