@@ -5,22 +5,22 @@ import PIL.Image
 import requests
 import streamlit as st
 
-def solve() -> str:
+# Set Up the Configurations' Options
+CONFIG = r"--psm 6 --oem 3"
 
-    # Using Global defined Filepath
-    global filepath
+# Dizy Site
+SITE = "https://www.dizy.com"
 
-    # Dizy Site
-    SITE = "https://www.dizy.com"
+# Query URL
+QUERY = "https://www.dizy.com/it/cruciverba/?q="
 
-    # Query URL
-    QUERY = "https://www.dizy.com/it/cruciverba/?q="
+# Transform and analyze the image to extract text
+def img_to_text(image) -> str:
 
-    # Set Up the Configurations' Options
-    CONFIG = r"--psm 6 --oem 3"
+    return pytesseract.image_to_string(PIL.Image.open(image), config=CONFIG)
 
-    # Converting the Image to Text
-    text = pytesseract.image_to_string(PIL.Image.open(filepath.get().split(" ")[2]), config=CONFIG)
+# Function for cleaning data and splitting the clues
+def clean_and_split_clues(text: str) -> list:
 
     # String Manipulation for Clenaing the Data
     text = text.replace("ORIZZONTALI", "")
@@ -50,11 +50,16 @@ def solve() -> str:
         phrase = " ".join(splitted[1:])
         cleared_clues.append(phrase)
 
+    return cleared_clues
+
+# Solve the clues scraping on the clues site, pairing the answers
+def solve_clues(clues: list) -> dict:
+
     # Creating the Answers Dictionary
     answers = {}
 
     # Parsing the Answers
-    for i, phrase in enumerate(cleared_clues):
+    for i, phrase in enumerate(clues):
         url = QUERY + phrase
         source = requests.get(url).text
         soup = BeautifulSoup(source, "html.parser")
@@ -64,7 +69,9 @@ def solve() -> str:
             source = requests.get(link).text
             soup = BeautifulSoup(source, "html.parser")
             answer = soup.find("b").text
-            answers[cleared_clues[i]] = answer
+            answers[clues[i]] = answer
+
+    return answers
 
 # Main program
 if __name__ == "__main__":
