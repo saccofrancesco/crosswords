@@ -127,3 +127,7 @@ if __name__ == "__main__":
 
         # Finding the clue's answers
         answers = solve_clues(clues, bar)
+
+        # Looping through the result and displaying the answers
+        for clue, answer in answers.items():
+            st.markdown(f"{clue} -> **{answer}**")
