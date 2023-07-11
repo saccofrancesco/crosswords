@@ -131,13 +131,14 @@ if __name__ == "__main__":
         # Creating a Camera input to take photos
         image = st.camera_input(".", label_visibility="hidden")
 
+        # Displaying a success message if an image is uploaded
+        st.success("Immagine caricata con successo!")
+
         # Button for starting the process
         photo_button = st.button("Analizza e cerca")
 
         # Check if an image is being inserted
         if photo_button and image is not None:
-
-            st.success("Immagine caricata con successo!")
 
             with st.spinner("Estraendo il testo..."):
                 # Extract text from the image
