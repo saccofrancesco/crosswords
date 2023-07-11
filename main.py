@@ -131,8 +131,11 @@ if __name__ == "__main__":
         # Creating a Camera input to take photos
         image = st.camera_input(".", label_visibility="hidden")
 
+        # Button for starting the process
+        button = st.button("Cerca")
+
         # Check if an image is being inserted
-        if image is not None:
+        if button and image is not None:
 
             with st.spinner("Estraendo il testo..."):
                 # Extract text from the image
