@@ -132,10 +132,10 @@ if __name__ == "__main__":
         image = st.camera_input(".", label_visibility="hidden")
 
         # Button for starting the process
-        button = st.button("Cerca")
+        photo_button = st.button("Cerca")
 
         # Check if an image is being inserted
-        if button and image is not None:
+        if photo_button and image is not None:
 
             with st.spinner("Estraendo il testo..."):
                 # Extract text from the image
@@ -168,10 +168,10 @@ if __name__ == "__main__":
                       max_chars=100, label_visibility="hidden")
         
         # Displaying an enter button
-        button = st.button("Cerca")
+        phrase_button = st.button("Cerca")
 
         # Searching the response
-        if button and phrase is not None:
+        if phrase_button and phrase is not None:
             with st.spinner("Trovando la risposta..."):
                 answer = get_clue_response(phrase)
 
