@@ -58,15 +58,19 @@ def clean_and_split_clues(text: str) -> list:
     return cleared_clues
 
 # Function to get soup response from a page
-def requestsoup_and_find(link: str , elem: str):
+
+
+def requestsoup_and_find(link: str, elem: str):
     source = requests.get(link).text
     soup = BeautifulSoup(source, "html.parser")
 
     return soup.find(elem)
 
 # Resolve only one clue
+
+
 def get_clue_response(clue: str) -> str:
-    
+
     url = QUERY + clue
     ul = requestsoup_and_find(url, "ul")
     if ul is not None:
@@ -157,4 +161,5 @@ if __name__ == "__main__":
     with phrase_tab:
 
         # Displaying the input field
-        st.text_input(".", placeholder="Inserisci una domanda", max_chars=100, label_visibility="hidden")
+        st.text_input(".", placeholder="Inserisci una domanda",
+                      max_chars=100, label_visibility="hidden")
