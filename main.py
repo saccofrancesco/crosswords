@@ -16,44 +16,51 @@ SITE = "https://www.dizy.com"
 QUERY = "https://www.dizy.com/it/cruciverba/?q="
 
 # Transform and analyze the image to extract text
+
+
 def img_to_text(image: bytes) -> str:
 
     return pytesseract.image_to_string(PIL.Image.open(image), config=CONFIG)
 
 # Function for cleaning data and splitting the clues
+
+
 def clean_and_split_clues(text: str) -> list:
 
-    # String Manipulation for Clenaing the Data
-    text = text.replace("ORIZZONTALI", "")
-    text = text.replace("VERTICALI", "")
-    text = text.replace(":", "")
-    text = text.replace("-", "")
-    text = text.replace("_", "")
-    text = text.replace(".", "")
+    # Clean the data
+    text = text.replace(
+        "ORIZZONTALI",
+        "").replace(
+        "VERTICALI",
+        "").replace(
+            ":",
+            "").replace(
+                "-",
+                "").replace(
+                    "_",
+                    "").replace(
+                        ".",
+        "")
     not_filtered_list = text.split()
-    new_text = ""
-    for i in range(len(not_filtered_list)):
-        if not_filtered_list[i] not in ["", "__", "_", "\n"]:
-            if not_filtered_list[i].isdigit() and i != 0 and len(
-                    not_filtered_list[i]) not in [3, 4]:
-                new_text += "\n"
-            new_text += f"{not_filtered_list[i]} "
 
-    # Saving the Uncleared List
-    uncleared_clues = new_text.split("\n")
-
-    # Creating the Cleared List
+    # Split the clues
     cleared_clues = []
-
-    # Deleting Numbers
-    for i in range(len(uncleared_clues)):
-        splitted = uncleared_clues[i].split(" ")
-        phrase = " ".join(splitted[1:])
-        cleared_clues.append(phrase)
+    current_clue = ""
+    for word in not_filtered_list:
+        if word.isdigit() and len(word) not in [3, 4]:
+            if current_clue:
+                cleared_clues.append(current_clue.strip())
+                current_clue = ""
+        else:
+            current_clue += f"{word} "
+    if current_clue:
+        cleared_clues.append(current_clue.strip())
 
     return cleared_clues
 
 # Solve the clues scraping on the clues site, pairing the answers
+
+
 def solve_clues(clues: list, bar) -> dict:
 
     # Creating the Answers Dictionary
@@ -82,6 +89,7 @@ def solve_clues(clues: list, bar) -> dict:
     # Concluding progress bar "progress"
     bar.progress(100, "Finished!")
     return answers
+
 
 # Main program
 if __name__ == "__main__":
