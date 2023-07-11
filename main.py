@@ -161,5 +161,24 @@ if __name__ == "__main__":
     with phrase_tab:
 
         # Displaying the input field
-        st.text_input(".", placeholder="Inserisci una domanda",
+        phrase = st.text_input(".", placeholder="Inserisci una domanda",
                       max_chars=100, label_visibility="hidden")
+        
+        # Displaying an enter button
+        button = st.button("Cerca")
+
+        # Searching the response
+        if button and phrase is not None:
+            with st.spinner("Trovando la risposta..."):
+                answer = get_clue_response(phrase)
+
+            # None case
+            if answer is None:
+
+                # Display a warning box
+                st.warning("Risposta non trovata...")
+            
+            else:
+
+                # Display the response with markdown format
+                st.markdown(f"**Risposta:** **{answer}**")
