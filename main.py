@@ -4,7 +4,6 @@ import pytesseract
 import PIL.Image
 import requests
 import streamlit as st
-from streamlit_back_camera_input import back_camera_input
 
 # Set Up the Configurations' Options
 CONFIG = r"--psm 6 --oem 3"
@@ -130,7 +129,7 @@ if __name__ == "__main__":
     with photo_tab:
 
         # Creating a Camera input to take photos
-        image = back_camera_input()
+        image = st.camera_input(".", label_visibility="hidden")
 
         # Check if an image is being inserted
         if image is not None:
