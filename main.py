@@ -171,7 +171,7 @@ if __name__ == "__main__":
         phrase_button = st.button("Cerca")
 
         # Searching the response
-        if phrase_button and phrase is not None:
+        if phrase_button and phrase != "":
             with st.spinner("Trovando la risposta..."):
                 answer = get_clue_response(phrase)
 
