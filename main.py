@@ -127,6 +127,12 @@ if __name__ == "__main__":
         # Finding the clue's answers
         answers = solve_clues(clues, bar)
 
+        # Creating 2 Columns
+        clue_col, answ_col = st.columns(2, gap="small")
+        clue_col.subheader("Domande")
+        answ_col.subheader("Risposte")
+
         # Looping through the result and displaying the answers
         for clue, answer in answers.items():
-            st.markdown(f"{clue} -> **{answer}**")
+            clue_col.caption(clue)
+            answ_col.caption(answer)
