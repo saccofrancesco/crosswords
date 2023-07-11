@@ -70,7 +70,7 @@ def solve_clues(clues: list, bar=None) -> dict:
     for i, phrase in enumerate(clues):
         if bar is not None:
             increment += add
-            bar.progress(increment, "Resolving Clues...")
+            bar.progress(increment, "Risolvendo le domande...")
 
         url = QUERY + phrase
         source = requests.get(url).text
@@ -91,7 +91,7 @@ def solve_clues(clues: list, bar=None) -> dict:
                         answers[clues[i]] = answer.text
 
     if bar is not None:
-        bar.progress(100, "Finished!")
+        bar.progress(100, "Finito!")
 
     return answers
 
@@ -108,31 +108,43 @@ if __name__ == "__main__":
     # Title of the Program
     st.title("Crossword Solver")
 
-    # Creating a Camera input to take photos
-    image = st.camera_input(".", label_visibility="hidden")
+    # Creating multiple tabs for photo and inline answers
+    photo_tab, phrase_tab = st.tabs(["Foto", "Frase"])
 
-    # Check if an image is being inserted
-    if image is not None:
+    # Managing the Photo tab
+    with photo_tab:
 
-        with st.spinner("Extracting text..."):
-            # Extract text from the image
-            text = img_to_text(image)
+        # Creating a Camera input to take photos
+        image = st.camera_input(".", label_visibility="hidden")
 
-            # Find the clues
-            clues = clean_and_split_clues(text)
+        # Check if an image is being inserted
+        if image is not None:
 
-        # Creating a progress bar
-        bar = st.progress(0, "Resolving Clues...")
+            with st.spinner("Estraendo il testo..."):
+                # Extract text from the image
+                text = img_to_text(image)
 
-        # Finding the clue's answers
-        answers = solve_clues(clues, bar)
+                # Find the clues
+                clues = clean_and_split_clues(text)
 
-        # Creating 2 Columns
-        clue_col, answ_col = st.columns(2, gap="small")
-        clue_col.subheader("Domande")
-        answ_col.subheader("Risposte")
+            # Creating a progress bar
+            bar = st.progress(0, "Risolvendo le domande...")
 
-        # Looping through the result and displaying the answers
-        for clue, answer in answers.items():
-            clue_col.markdown(f"**{clue}**")
-            answ_col.markdown(f"**{answer}**")
+            # Finding the clue's answers
+            answers = solve_clues(clues, bar)
+
+            # Creating 2 Columns
+            clue_col, answ_col = st.columns(2, gap="small")
+            clue_col.subheader("Domande")
+            answ_col.subheader("Risposte")
+
+            # Looping through the result and displaying the answers
+            for clue, answer in answers.items():
+                clue_col.markdown(f"**{clue}**")
+                answ_col.markdown(f"**{answer}**")
+
+    # Managing the Phrase tab
+    with phrase_tab:
+
+        # Displaying the input field
+        st.text_input(".", placeholder="Inserisci una domanda", max_chars=100, label_visibility="hidden")
