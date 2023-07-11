@@ -61,33 +61,39 @@ def clean_and_split_clues(text: str) -> list:
 # Solve the clues scraping on the clues site, pairing the answers
 
 
-def solve_clues(clues: list, bar) -> dict:
-
-    # Creating the Answers Dictionary
+def solve_clues(clues: list, bar=None) -> dict:
     answers = {}
 
-    # Var for the progress bar
-    increment = 0
-    add = 100 // math.ceil(len(clues))
+    if bar is not None:
+        increment = 0
+        add = 100 // len(clues)
 
-    # Parsing the Answers
     for i, phrase in enumerate(clues):
-        increment += add
-        bar.progress(increment, "Resolving Clues...")
+        if bar is not None:
+            increment += add
+            bar.progress(increment, "Resolving Clues...")
+
         url = QUERY + phrase
         source = requests.get(url).text
         soup = BeautifulSoup(source, "html.parser")
-        if ul := soup.find("ul"):
-            href = ul.find("a")
-            link = SITE + href["href"]
-            source = requests.get(link).text
-            soup = BeautifulSoup(source, "html.parser")
-            table = soup.find("table")
-            answer = table.find("b").text
-            answers[clues[i]] = answer
 
-    # Concluding progress bar "progress"
-    bar.progress(100, "Finished!")
+        ul = soup.find("ul")
+        if ul is not None:
+            href = ul.find("a")
+            if href is not None:
+                link = SITE + href["href"]
+                source = requests.get(link).text
+                soup = BeautifulSoup(source, "html.parser")
+
+                table = soup.find("table")
+                if table is not None:
+                    answer = table.find("b")
+                    if answer is not None:
+                        answers[clues[i]] = answer.text
+
+    if bar is not None:
+        bar.progress(100, "Finished!")
+
     return answers
 
 
