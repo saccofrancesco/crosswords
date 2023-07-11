@@ -132,7 +132,8 @@ if __name__ == "__main__":
         image = st.camera_input(".", label_visibility="hidden")
 
         # Displaying a success message if an image is uploaded
-        st.success("Immagine caricata con successo!")
+        if image is not None:
+            st.success("Immagine caricata con successo!")
 
         # Button for starting the process
         photo_button = st.button("Analizza e cerca")
