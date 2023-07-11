@@ -137,6 +137,8 @@ if __name__ == "__main__":
         # Check if an image is being inserted
         if photo_button and image is not None:
 
+            st.success("Immagine caricata con successo!")
+
             with st.spinner("Estraendo il testo..."):
                 # Extract text from the image
                 text = img_to_text(image)
