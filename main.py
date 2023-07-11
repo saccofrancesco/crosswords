@@ -132,7 +132,7 @@ if __name__ == "__main__":
         image = st.camera_input(".", label_visibility="hidden")
 
         # Button for starting the process
-        photo_button = st.button("Cerca")
+        photo_button = st.button("Analizza e cerca")
 
         # Check if an image is being inserted
         if photo_button and image is not None:
