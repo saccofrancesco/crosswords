@@ -70,6 +70,7 @@ def solve_single_clue(clue: str) -> str:
     # Request the clue via querying
     url = QUERY + clue
     soup = get_site_content(url)
+    answer = ""
 
     # Find the answer in the returned page
     ul = soup.find("ul")
