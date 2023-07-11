@@ -123,7 +123,7 @@ if __name__ == "__main__":
     st.title("Crossword Solver")
 
     # Creating multiple tabs for photo and inline answers
-    photo_tab, phrase_tab = st.tabs(["Foto", "Frase"])
+    phrase_tab, photo_tab = st.tabs(["Frase", "Foto"])
 
     # Managing the Photo tab
     with photo_tab:
