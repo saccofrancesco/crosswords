@@ -4,7 +4,6 @@ import pytesseract
 import PIL.Image
 import requests
 import streamlit as st
-import math
 
 # Set Up the Configurations' Options
 CONFIG = r"--psm 6 --oem 3"
