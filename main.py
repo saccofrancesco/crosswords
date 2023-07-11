@@ -134,5 +134,5 @@ if __name__ == "__main__":
 
         # Looping through the result and displaying the answers
         for clue, answer in answers.items():
-            clue_col.caption(clue)
-            answ_col.caption(answer)
+            clue_col.markdown(f"**{clue}**")
+            answ_col.markdown(f"**{answer}**")
