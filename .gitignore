@@ -2,3 +2,4 @@
 /img
 .DS_Store
 .python-version
+.venv
