@@ -1,4 +1,4 @@
-/img
-.DS_Store
-.python-version
 .venv
+img
+.python-version
+.DS_Store
