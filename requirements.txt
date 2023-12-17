@@ -37,7 +37,7 @@ pytz-deprecation-shim==0.1.0.post0
 referencing==0.32.0
 requests==2.31.0
 rich==13.7.0
-rpds-py==0.13.2
+rpds-py==0.14.2
 six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
