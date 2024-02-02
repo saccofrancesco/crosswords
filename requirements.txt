@@ -4,7 +4,7 @@ autopep8==2.0.4
 beautifulsoup4==4.12.3
 blinker==1.7.0
 cachetools==5.3.2
-certifi==2023.11.17
+certifi==2024.2.2
 charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
@@ -32,7 +32,7 @@ Pygments==2.17.2
 Pympler==1.0.1
 pytesseract==0.3.10
 python-dateutil==2.8.2
-pytz==2023.4
+pytz==2024.1
 pytz-deprecation-shim==0.1.0.post0
 referencing==0.33.0
 requests==2.31.0
