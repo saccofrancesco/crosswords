@@ -41,7 +41,7 @@ rpds-py==0.18.0
 six==1.16.0
 smmap==5.0.1
 soupsieve==2.5
-streamlit==1.32.1
+streamlit==1.32.2
 tenacity==8.2.3
 toml==0.10.2
 toolz==0.12.1
@@ -52,4 +52,4 @@ tzlocal==5.2
 urllib3==2.2.1
 validators==0.22.0
 watchdog==4.0.0
-zipp==3.18.0
+zipp==3.18.1
