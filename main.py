@@ -193,16 +193,16 @@ if __name__ == "__main__":
     # Managing the Phrase tab
     with phrase_tab:
         # Displaying the input field
-        phrase = st.text_input(".", placeholder="Inserisci una domanda",
+        phrase: str = st.text_input(".", placeholder="Inserisci una domanda",
                                max_chars=100, label_visibility="hidden")
         
         # Displaying an enter button
-        phrase_button = st.button("Cerca")
+        phrase_button: bool = st.button("Cerca")
 
         # Searching the response
         if phrase_button and phrase != "":
             with st.spinner("Trovando la risposta..."):
-                answer = get_clue_response(phrase)
+                answer: str = get_clue_response(phrase)
 
             # None case
             if answer is None:
