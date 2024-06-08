@@ -1,55 +1,63 @@
 # Importing Libraries
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 import pytesseract
 import PIL.Image
 import requests
 import streamlit as st
+from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 # Set Up the Configurations' Options
-CONFIG = r"--psm 6 --oem 3"
+CONFIG: str = r"--psm 6 --oem 3"
 
 # Dizy Site
-SITE = "https://www.dizy.com"
+SITE: str = "https://www.dizy.com"
 
 # Query URL
-QUERY = "https://www.dizy.com/it/cruciverba/?q="
+QUERY: str = "https://www.dizy.com/it/cruciverba/?q="
 
 # Transform and analyze the image to extract text
-
-
 def img_to_text(image: bytes) -> str:
+    """
+    Extracts text from an image using Tesseract OCR.
 
+    Parameters:
+    image (bytes): The image from which text will be extracted.
+
+    Returns:
+    str: The extracted text.
+    """
     return pytesseract.image_to_string(PIL.Image.open(image), config=CONFIG)
 
 # Function for cleaning data and splitting the clues
-
-
 def clean_and_split_clues(text: str) -> list:
+    """
+    Cleans and splits the text into individual clues.
 
+    Parameters:
+    text (str): The raw text containing the clues.
+
+    Returns:
+    list: A list of cleaned clues.
+    """
     # Clean the data
-    text = text.replace(
-        "ORIZZONTALI",
-        "").replace(
-        "VERTICALI",
-        "").replace(
-            ":",
-            "").replace(
-                "-",
-                "").replace(
-                    "_",
-                    "").replace(
-                        ".",
-        "")
-    not_filtered_list = text.split()
+    text: str = text.replace(
+        "ORIZZONTALI", "").replace(
+        "VERTICALI", "").replace(
+        ":", "").replace(
+        "-", "").replace(
+        "_", "").replace(
+        ".", "")
+    not_filtered_list: list = text.split()
 
     # Split the clues
-    cleared_clues = []
-    current_clue = ""
+    cleared_clues: list = []
+    current_clue: str = ""
     for word in not_filtered_list:
         if word.isdigit() and len(word) not in [3, 4]:
             if current_clue:
                 cleared_clues.append(current_clue.strip())
-                current_clue = ""
+                current_clue: str = ""
         else:
             current_clue += f"{word} "
     if current_clue:
@@ -58,49 +66,70 @@ def clean_and_split_clues(text: str) -> list:
     return cleared_clues
 
 # Function to get soup response from a page
-
-
 def requestsoup_and_find(link: str, elem: str):
-    source = requests.get(link).text
-    soup = BeautifulSoup(source, "html.parser")
+    """
+    Sends a GET request to a URL and parses the HTML to find a specified element.
 
+    Parameters:
+    link (str): The URL to request.
+    elem (str): The HTML element to find.
+
+    Returns:
+    BeautifulSoup element: The first found HTML element matching the specified tag.
+    """
+    source: str = requests.get(link).text
+    soup: BeautifulSoup = BeautifulSoup(source, "html.parser")
     return soup.find(elem)
 
 # Resolve only one clue
-
-
 def get_clue_response(clue: str) -> str:
+    """
+    Gets the response for a single crossword clue by scraping a website.
 
-    url = QUERY + clue
-    ul = requestsoup_and_find(url, "ul")
+    Parameters:
+    clue (str): The crossword clue to solve.
+
+    Returns:
+    str: The answer to the clue, or None if not found.
+    """
+    url: str = QUERY + clue
+    ul: Tag = requestsoup_and_find(url, "ul")
     if ul is not None:
-        href = ul.find("a")
+        href: Tag = ul.find("a")
         if href is not None:
-            link = SITE + href["href"]
-            table = requestsoup_and_find(link, "table")
+            link: str = SITE + href["href"]
+            table: Tag = requestsoup_and_find(link, "table")
             if table is not None:
-                answer = table.find("b")
+                answer: Tag = table.find("b")
                 if answer is not None:
                     return answer.text
-
-    return None
+    else:
+        return None
 
 # Solve the clues scraping on the clues site, pairing the answers
-
-
 def solve_clues(clues: list, bar=None) -> dict:
-    answers = {}
+    """
+    Solves a list of crossword clues by scraping answers from a website.
+
+    Parameters:
+    clues (list): A list of crossword clues to solve.
+    bar (streamlit.progress, optional): A Streamlit progress bar object.
+
+    Returns:
+    dict: A dictionary mapping clues to their answers.
+    """
+    answers: dict = {}
 
     if bar is not None:
-        increment = 0
-        add = 100 // len(clues)
+        increment: int = 0
+        add: int = 100 // len(clues)
 
     for i, phrase in enumerate(clues):
         if bar is not None:
             increment += add
             bar.progress(increment, "Risolvendo le domande...")
 
-        answer = get_clue_response(phrase)
+        answer: str = get_clue_response(phrase)
         if answer is not None:
             answers[clues[i]] = answer
 
@@ -109,11 +138,10 @@ def solve_clues(clues: list, bar=None) -> dict:
 
     return answers
 
-
 # Main program
 if __name__ == "__main__":
-
-    # Modifiyng App name and icon
+    
+    # Modifying App name and icon
     st.set_page_config(
         page_title='Crossword Solver',
         page_icon="favicon.ico",
@@ -127,32 +155,30 @@ if __name__ == "__main__":
 
     # Managing the Photo tab
     with photo_tab:
-
         # Creating a Camera input to take photos
-        image = st.camera_input(".", label_visibility="hidden")
+        image: UploadedFile = st.camera_input(".", label_visibility="hidden")
 
         # Displaying a success message if an image is uploaded
         if image is not None:
             st.success("Immagine caricata con successo!")
 
         # Button for starting the process
-        photo_button = st.button("Analizza e cerca")
+        photo_button: bool = st.button("Analizza e cerca")
 
         # Check if an image is being inserted
         if photo_button and image is not None:
-
             with st.spinner("Estraendo il testo..."):
                 # Extract text from the image
-                text = img_to_text(image)
+                text: str = img_to_text(image)
 
                 # Find the clues
-                clues = clean_and_split_clues(text)
+                clues: list = clean_and_split_clues(text)
 
             # Creating a progress bar
-            bar = st.progress(0, "Risolvendo le domande...")
+            bar: bool = st.progress(0, "Risolvendo le domande...")
 
             # Finding the clue's answers
-            answers = solve_clues(clues, bar)
+            answers: dict = solve_clues(clues, bar)
 
             # Creating 2 Columns
             clue_col, answ_col = st.columns(2, gap="small")
@@ -166,10 +192,9 @@ if __name__ == "__main__":
 
     # Managing the Phrase tab
     with phrase_tab:
-
         # Displaying the input field
         phrase = st.text_input(".", placeholder="Inserisci una domanda",
-                      max_chars=100, label_visibility="hidden")
+                               max_chars=100, label_visibility="hidden")
         
         # Displaying an enter button
         phrase_button = st.button("Cerca")
@@ -181,11 +206,8 @@ if __name__ == "__main__":
 
             # None case
             if answer is None:
-
                 # Display a warning box
                 st.warning("Risposta non trovata...")
-            
             else:
-
                 # Display the response with markdown format
                 st.markdown(f"**Risposta:** **{answer}**")
