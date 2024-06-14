@@ -1,5 +1,5 @@
-# Crossword-Solver
-[Crossword Solver](https://crosswordsolver.streamlit.app/) is an app for getting the Answers to a Crossword Puzzle, using pyTesseract and Web Scraping
+# Crosswords
+[Crosswords](https://crosswordsolver.streamlit.app/) is an app for getting the Answers to a Crossword Puzzle, using pyTesseract and Web Scraping
 
 ## Set Up
 ### Locally
@@ -23,7 +23,7 @@ streamlit run .\main.py
 This will start a **local server** on your *computer*, and another one on the *network* (Wi-Fi if you're connected) so that you can *access* from different devices.
 
 ## Online
-o use this app online, simply visit [crossword-solver](https://crosswordsolver.streamlit.app/)!
+o use this app online, simply visit [crosswords](https://crosswordsolver.streamlit.app/)!
 
 # Start the Script
 Now that you know how to run the program, you can simply do it. **Happy Solving!**
