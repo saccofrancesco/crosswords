@@ -148,7 +148,7 @@ if __name__ == "__main__":
         layout="centered")
 
     # Title of the Program
-    st.title("Crossword Solver")
+    st.title("Crosswords")
 
     # Creating multiple tabs for photo and inline answers
     phrase_tab, photo_tab = st.tabs(["Frase", "Foto"])
