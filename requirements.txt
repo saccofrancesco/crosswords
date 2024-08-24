@@ -11,7 +11,7 @@ colorama==0.4.6
 decorator==5.1.1
 gitdb==4.0.11
 GitPython==3.1.43
-idna==3.7
+idna==3.8
 importlib_metadata==8.4.0
 Jinja2==3.1.4
 jsonschema==4.23.0
@@ -19,7 +19,7 @@ jsonschema-specifications==2023.12.1
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 mdurl==0.1.2
-narwhals==1.5.3
+narwhals==1.5.5
 numpy==2.1.0
 packaging==24.1
 pandas==2.2.2
