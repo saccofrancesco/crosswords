@@ -37,7 +37,7 @@ pytz==2024.1
 pytz-deprecation-shim==0.1.0.post0
 referencing==0.35.1
 requests==2.32.3
-rich==13.7.1
+rich==13.8.0
 rpds-py==0.20.0
 six==1.16.0
 smmap==5.0.1
@@ -53,4 +53,4 @@ tzlocal==5.2
 urllib3==2.2.2
 validators==0.33.0
 watchdog==4.0.2
-zipp==3.20.0
+zipp==3.20.1
