@@ -16,6 +16,7 @@ SITE: str = "https://www.dizy.com"
 # Query URL
 QUERY: str = "https://www.dizy.com/it/cruciverba/?q="
 
+
 # Transform and analyze the image to extract text
 def img_to_text(image: bytes) -> str:
     """
@@ -29,6 +30,7 @@ def img_to_text(image: bytes) -> str:
     """
     return pytesseract.image_to_string(PIL.Image.open(image), config=CONFIG)
 
+
 # Function for cleaning data and splitting the clues
 def clean_and_split_clues(text: str) -> list:
     """
@@ -41,13 +43,14 @@ def clean_and_split_clues(text: str) -> list:
     list: A list of cleaned clues.
     """
     # Clean the data
-    text: str = text.replace(
-        "ORIZZONTALI", "").replace(
-        "VERTICALI", "").replace(
-        ":", "").replace(
-        "-", "").replace(
-        "_", "").replace(
-        ".", "")
+    text: str = (
+        text.replace("ORIZZONTALI", "")
+        .replace("VERTICALI", "")
+        .replace(":", "")
+        .replace("-", "")
+        .replace("_", "")
+        .replace(".", "")
+    )
     not_filtered_list: list = text.split()
 
     # Split the clues
@@ -65,6 +68,7 @@ def clean_and_split_clues(text: str) -> list:
 
     return cleared_clues
 
+
 # Function to get soup response from a page
 def requestsoup_and_find(link: str, elem: str):
     """
@@ -80,6 +84,7 @@ def requestsoup_and_find(link: str, elem: str):
     source: str = requests.get(link).text
     soup: BeautifulSoup = BeautifulSoup(source, "html.parser")
     return soup.find(elem)
+
 
 # Resolve only one clue
 def get_clue_response(clue: str) -> str:
@@ -105,6 +110,7 @@ def get_clue_response(clue: str) -> str:
                     return answer.text
     else:
         return None
+
 
 # Solve the clues scraping on the clues site, pairing the answers
 def solve_clues(clues: list, bar=None) -> dict:
@@ -138,14 +144,14 @@ def solve_clues(clues: list, bar=None) -> dict:
 
     return answers
 
+
 # Main program
 if __name__ == "__main__":
-    
+
     # Modifying App name and icon
     st.set_page_config(
-        page_title='Crossword Solver',
-        page_icon="favicon.ico",
-        layout="centered")
+        page_title="Crossword Solver", page_icon="favicon.ico", layout="centered"
+    )
 
     # Title of the Program
     st.title("Crosswords")
@@ -193,9 +199,13 @@ if __name__ == "__main__":
     # Managing the Phrase tab
     with phrase_tab:
         # Displaying the input field
-        phrase: str = st.text_input(".", placeholder="Inserisci una domanda",
-                               max_chars=100, label_visibility="hidden")
-        
+        phrase: str = st.text_input(
+            ".",
+            placeholder="Inserisci una domanda",
+            max_chars=100,
+            label_visibility="hidden",
+        )
+
         # Displaying an enter button
         phrase_button: bool = st.button("Cerca")
 
