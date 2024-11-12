@@ -42,7 +42,7 @@ rpds-py==0.21.0
 six==1.16.0
 smmap==5.0.1
 soupsieve==2.6
-streamlit==1.40.0
+streamlit==1.40.1
 tenacity==9.0.0
 toml==0.10.2
 toolz==1.0.0
