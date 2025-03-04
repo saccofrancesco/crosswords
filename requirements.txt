@@ -8,7 +8,7 @@ certifi==2025.1.31
 charset-normalizer==3.4.1
 click==8.1.8
 colorama==0.4.6
-decorator==5.1.1
+decorator==5.2.1
 gitdb==4.0.12
 GitPython==3.1.44
 idna==3.10
@@ -19,7 +19,7 @@ jsonschema-specifications==2024.10.1
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
-narwhals==1.27.1
+narwhals==1.29.0
 numpy==2.2.3
 packaging==24.2
 pandas==2.2.3
