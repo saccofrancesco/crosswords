@@ -5,7 +5,7 @@ beautifulsoup4==4.13.4
 blinker==1.9.0
 cachetools==5.5.2
 certifi==2025.4.26
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
 click==8.1.8
 colorama==0.4.6
 decorator==5.2.1
@@ -19,7 +19,7 @@ jsonschema-specifications==2025.4.1
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
-narwhals==1.37.0
+narwhals==1.37.1
 numpy==2.2.5
 packaging==24.2
 pandas==2.2.3
@@ -42,7 +42,7 @@ rpds-py==0.24.0
 six==1.17.0
 smmap==5.0.2
 soupsieve==2.7
-streamlit==1.44.1
+streamlit==1.45.0
 tenacity==9.1.2
 toml==0.10.2
 toolz==1.0.0
@@ -51,6 +51,6 @@ typing_extensions==4.13.2
 tzdata==2025.2
 tzlocal==5.3.1
 urllib3==2.4.0
-validators==0.34.0
+validators==0.35.0
 watchdog==6.0.0
 zipp==3.21.0
