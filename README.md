@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/icon.png" alt="Crosswords App" width="350">
+  <img src="icon.png" alt="Crosswords App" width="350">
   <h1>Crosswords: Crossword Puzzle Answer Finder</h1>
 </div>
 
