@@ -1,29 +1,89 @@
-# Crosswords
-[Crosswords](https://crosswords.streamlit.app/) is an app for getting the Answers to a Crossword Puzzle, using pyTesseract and Web Scraping
+<div align="center">
+  <img src="img/icon.png" alt="Crosswords App" width="350">
+  <h1>Crosswords: Crossword Puzzle Answer Finder</h1>
+</div>
 
-## Set Up
-### Locally
-Download the ZIP Folder, or Clone the Repository with:
+<h4 align="center">An app to help you solve crossword puzzles using pyTesseract and Web Scraping built using https://streamlit.io.</h4>
+
+<p align="center">
+  <img src="https://img.shields.io/github/contributors/saccofrancesco/crosswords?style=for-the-badge" alt="Contributors">
+  <img src="https://img.shields.io/github/forks/saccofrancesco/crosswords?style=for-the-badge" alt="Forks">
+  <img src="https://img.shields.io/github/stars/saccofrancesco/crosswords?style=for-the-badge" alt="Stars">
+</p>
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#license">License</a>
+</p>
+
+## Key Features of Crosswords
+
+* **Efficient Crossword Solver** – Find answers to crossword puzzles with ease using OCR (Tesseract) and web scraping.
+* **Real-Time Answer Generation** – Quickly generates answers based on the clues provided.
+* **Simple Interface** – Intuitive UI for seamless interaction and fast crossword solving.
+* **Cross-Platform Compatibility** – Works on Windows, macOS, and Linux.
+
+## How To Use Crosswords
+
+### Online
+You can simply visit the crosswords app clicking [here](https://crosswords.streamlit.app)!
+
+### Set it up on your machine
+
+Follow these steps to clone and run the Crosswords app on your machine. You'll need [Git](https://git-scm.com) and [Python](https://www.python.org/downloads/) installed, along with [pip](https://pip.pypa.io/en/stable/).
+
+1. Clone this repository:
+
+```bash
+$ git clone https://github.com/saccofrancesco/crosswords.git
 ```
-git clone https://github.com/saccofrancesco/crosswords.git
+
+2. Navigate into the repository:
+
+```bash
+$ cd crosswords
 ```
 
-Then install the dependencies in a virtualenv, you can create one via `python -m venv <name of the virtualenv>`, with:
-```python
-pip install -r requirements.txt
+3. Install dependencies:
+
+```bash
+$ pip install -r requirements.txt
 ```
 
-Then, you need to install what is called **Tesseract**, a library for text recognition, specifically, **OCR**. You can search it on Github and follow the instructions over their Repo. This is the [link](https://github.com/tesseract-ocr/tesseract).
-Then add the Installation Folder to Your **SYSTEM PATH** else, the script **won't work!**. [Here](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/) there is a guide.
+4. Install Tesseract:
 
-When you are done with this, you can already use the app by simply *activating* your virtualenv and running:
+Tesseract is required for text recognition (OCR). You can find the installation instructions on the [Tesseract GitHub page](https://github.com/tesseract-ocr/tesseract). After installation, be sure to add the installation folder to your **SYSTEM PATH**.
+
+5. Run the app:
+
+```bash
+$ streamlit run .\main.py
 ```
-streamlit run .\main.py
-```
-This will start a **local server** on your *computer*, and another one on the *network* (Wi-Fi if you're connected) so that you can *access* from different devices.
 
-## Online
-o use this app online, simply visit [crosswords](https://crosswords.streamlit.app/)!
+This will start a **local server** and a **network server**, allowing you to access the app from different devices.
 
-# Start the Script
-Now that you know how to run the program, you can simply do it. **Happy Solving!**
+## Credits & Acknowledgements
+
+Crosswords uses the following open-source libraries:
+
+* [Python](https://www.python.org/)
+* [pyTesseract](https://github.com/madmaze/pytesseract)
+* [Streamlit](https://streamlit.io/)
+* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+
+## You Might Also Like...
+
+Explore more projects by the same author:
+
+* [supreme-bot](https://github.com/saccofrancesco/supreme-bot): A bot for buying Supreme items built with [NiceGUI](https://nicegui.io).
+* [lock](https://github.com/saccofrancesco/lock): A secure password manager built using [CustomTkinter](https://customtkinter.tomschimansky.com/).
+
+## License
+
+This project is licensed under the Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+---
+
+> GitHub [@saccofrancesco](https://github.com/saccofrancesco)
