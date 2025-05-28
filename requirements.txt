@@ -14,12 +14,12 @@ GitPython==3.1.44
 idna==3.10
 importlib_metadata==8.7.0
 Jinja2==3.1.6
-jsonschema==4.23.0
+jsonschema==4.24.0
 jsonschema-specifications==2025.4.1
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
-narwhals==1.40.0
+narwhals==1.41.0
 numpy==2.2.6
 packaging==24.2
 pandas==2.2.3
@@ -53,4 +53,4 @@ tzlocal==5.3.1
 urllib3==2.4.0
 validators==0.35.0
 watchdog==6.0.0
-zipp==3.21.0
+zipp==3.22.0
