@@ -19,7 +19,7 @@ jsonschema-specifications==2025.4.1
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
-narwhals==1.41.1
+narwhals==1.42.0
 numpy==2.3.0
 packaging==24.2
 pandas==2.3.0
@@ -36,7 +36,7 @@ python-dateutil==2.9.0.post0
 pytz==2025.2
 pytz-deprecation-shim==0.1.0.post0
 referencing==0.36.2
-requests==2.32.3
+requests==2.32.4
 rich==14.0.0
 rpds-py==0.25.1
 six==1.17.0
@@ -53,4 +53,4 @@ tzlocal==5.3.1
 urllib3==2.4.0
 validators==0.35.0
 watchdog==6.0.0
-zipp==3.22.0
+zipp==3.23.0
