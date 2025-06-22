@@ -29,7 +29,7 @@ protobuf==6.31.1
 pyarrow==20.0.0
 pycodestyle==2.14.0
 pydeck==0.9.1
-Pygments==2.19.1
+Pygments==2.19.2
 Pympler==1.1
 pytesseract==0.3.13
 python-dateutil==2.9.0.post0
