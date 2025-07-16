@@ -4,7 +4,7 @@ autopep8==2.3.2
 beautifulsoup4==4.13.4
 blinker==1.9.0
 cachetools==5.5.2
-certifi==2025.6.15
+certifi==2025.7.14
 charset-normalizer==3.4.2
 click==8.2.1
 colorama==0.4.6
@@ -19,7 +19,7 @@ jsonschema-specifications==2025.4.1
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
-narwhals==1.46.0
+narwhals==1.47.0
 numpy==2.3.1
 packaging==24.2
 pandas==2.3.1
@@ -42,7 +42,7 @@ rpds-py==0.26.0
 six==1.17.0
 smmap==5.0.2
 soupsieve==2.7
-streamlit==1.46.1
+streamlit==1.47.0
 tenacity==9.1.2
 toml==0.10.2
 toolz==1.0.0
