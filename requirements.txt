@@ -19,7 +19,7 @@ jsonschema-specifications==2025.4.1
 markdown-it-py==4.0.0
 MarkupSafe==3.0.2
 mdurl==0.1.2
-narwhals==2.1.2
+narwhals==2.2.0
 numpy==2.3.2
 packaging==25.0
 pandas==2.3.2
