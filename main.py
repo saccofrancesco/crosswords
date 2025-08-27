@@ -29,7 +29,7 @@ def encode_uploaded_image(uploaded_file: UploadedFile) -> str:
 
 # Instructions prompt
 prompt: str = """You are given an image of a crossword puzzle solution. 
-Extract the answers and return them strictly in the following Python dictionary format, and nothing else:
+Extract the clues and return them strictly in the following Python dictionary format, and nothing else:
 
 {
     "Orizzontali": {
