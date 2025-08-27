@@ -121,7 +121,7 @@ def solve_clues(clues: list[str], bar=None) -> dict[str, str]:
 # -----------------------------
 # STREAMLIT APP
 # -----------------------------
-st.set_page_config(page_title="Crossword Solver", page_icon="favicon.ico", layout="centered")
+st.set_page_config(page_title="Crossword Solver", page_icon="icon.png", layout="centered")
 st.title("Crosswords")
 
 phrase_tab, photo_tab = st.tabs(["Frase", "Foto"])
