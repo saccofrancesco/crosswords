@@ -9,7 +9,7 @@
   </a>
 </div>
 
-<h4 align="center">A fast and intuitive crossword solver powered by <a href="https://github.com/madmaze/pytesseract" target="_blank">Tesseract OCR</a> and web scraping — built with <a href="https://streamlit.io" target="_blank">Streamlit</a>.</h4>
+<h4 align="center">A fast and intuitive crossword solver powered by <a href="https://platform.openai.com/docs/overview" target="_blank">OpenAI</a> and web scraping — built with <a href="https://streamlit.io" target="_blank">Streamlit</a>.</h4>
 
 <p align="center">
   <img src="https://img.shields.io/github/contributors/saccofrancesco/crosswords?style=for-the-badge" alt="Contributors">
@@ -28,7 +28,7 @@
 ---
 
 ## 📌 TL;DR
-**Crosswords** helps you solve puzzles by recognizing text with Tesseract OCR and scraping answer databases.  
+**Crosswords** helps you solve puzzles by recognizing text with ChatGPT OCR and scraping answer databases.  
 It runs locally or online via Streamlit — fast, lightweight, and cross-platform.
 
 👉 Try it online: [crosswords.streamlit.app](https://crosswords.streamlit.app)
@@ -36,16 +36,18 @@ It runs locally or online via Streamlit — fast, lightweight, and cross-platfor
 ---
 
 ## 🔑 Key Features
-* **Efficient Solver** – OCR + web scraping finds answers fast  
-* **Real-Time Generation** – Instant suggestions from your clues  
-* **Simple UI** – Clean Streamlit interface  
-* **Cross-Platform** – Runs on Windows, macOS, and Linux  
+
+- **AI-Powered Clue Recognition** – Uses ChatGPT’s image model to read and structure crossword clues from screenshots or scans
+- **Efficient Solver** – Web scraping + AI clue parsing finds answers fast
+- **Real-Time Generation** – Instant suggestions from your clues
+- **Simple UI** – Clean Streamlit interface
+- **Cross-Platform** – Runs on Windows, macOS, and Linux
 
 ---
 
 ## ⚡ Quickstart
 
-You’ll need [Git](https://git-scm.com), [Python](https://www.python.org/downloads/), and [pip](https://pip.pypa.io/en/stable/).  
+You’ll need [Git](https://git-scm.com/), [Python](https://www.python.org/downloads/), and [pip](https://pip.pypa.io/en/stable/).
 
 ```bash
 # Clone this repository
@@ -55,10 +57,6 @@ cd crosswords
 # Install dependencies
 pip install -r requirements.txt
 
-# Install Tesseract (required for OCR)
-# Follow instructions: https://github.com/tesseract-ocr/tesseract
-# After installation, add Tesseract to your SYSTEM PATH
-
 # Run the app
 streamlit run main.py
 ```
@@ -67,14 +65,33 @@ This will start a **local server** (for your device) and a **network server** (a
 
 ---
 
+## 🖼️ How It Works: Clue Recognition with ChatGPT Vision
+
+1. Upload or paste a screenshot/photo of your crossword puzzle.
+2. ChatGPT’s image model automatically **detects and extracts the clues** (e.g., “12 Across: Capital of Norway (4)”).
+3. The app structures them into JSON format for easy processing:
+
+```json
+[
+  { "number": "12", "direction": "Across", "clue": "Capital of Norway", "length": 4 },
+  { "number": "7", "direction": "Down", "clue": "Opposite of cold", "length": 3 }
+]
+```
+
+1. The solver uses these parsed clues to query answer databases and return suggestions.
+
+No more messy OCR post-processing — just **clean, structured clues straight from the puzzle image**.
+
+---
+
 ## 🧠 Credits & Acknowledgements
 
 Crosswords uses these great tools:
 
 * [Python](https://www.python.org/)
-* [pyTesseract](https://github.com/madmaze/pytesseract)
-* [Streamlit](https://streamlit.io/)
+* [ChatGPT](https://platform.openai.com/docs/overview)
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* [Streamlit](https://streamlit.io/)
 
 ---
 
