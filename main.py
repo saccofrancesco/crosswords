@@ -1,6 +1,4 @@
-# -----------------------------
-# IMPORTS
-# -----------------------------
+# Importing libraries
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
@@ -8,21 +6,19 @@ from bs4.element import Tag
 import base64
 from openai import OpenAI
 from streamlit.runtime.uploaded_file_manager import UploadedFile
+import json
 
-# -----------------------------
-# OPENAI CLIENT USING SECRETS
-# -----------------------------
+# Creating and Configuring the OpenAI Client
 client: OpenAI = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-# -----------------------------
-# CONFIG & URLS
-# -----------------------------
+# Crosswords' solutions site
 SITE: str = "https://www.dizy.com"
-QUERY: str = "https://www.dizy.com/it/cruciverba/?q="  # Base URL to search crossword clues
+QUERY: str = (
+    "https://www.dizy.com/it/cruciverba/?q="  # Base URL to search crossword clues
+)
 
-# -----------------------------
-# IMAGE OCR WITH GPT
-# -----------------------------
+
+# Transform the image from bytes to base64 encoding format to pass to ChatGPT image model
 def encode_uploaded_image(uploaded_file: UploadedFile) -> str:
     """
     Encode a Streamlit UploadedFile (image) to Base64 string for OpenAI input.
@@ -30,10 +26,38 @@ def encode_uploaded_image(uploaded_file: UploadedFile) -> str:
     img_bytes: bytes = uploaded_file.read()
     return base64.b64encode(img_bytes).decode("utf-8")
 
-def img_to_text(uploaded_file: UploadedFile) -> str:
+
+# Instructions prompt
+prompt: str = """You are given an image of a crossword puzzle solution. 
+Extract the answers and return them strictly in the following Python dictionary format, and nothing else:
+
+{
+    "Orizzontali": {
+        "1": "...",
+        "2": "...",
+        "3": "...",
+        ...
+    },
+    "Verticali": {
+        "1": "...",
+        "2": "...",
+        "3": "...",
+        ...
+    }
+}
+
+Rules:
+- Do not add explanations, comments, or extra text.
+- Do not wrap the response in code fences.
+- Use the exact key names "Orizzontali" and "Verticali".
+- Only output the dictionary.
+"""
+
+
+def img_to_text(uploaded_file: UploadedFile) -> dict[str, dict[str, str]]:
     """
     Extract text from an image using OpenAI's GPT image model.
-    Returns all detected text as a single string.
+    Returns all detected text as formatted JSON like string.
     """
     base64_image: str = encode_uploaded_image(uploaded_file)
     response = client.responses.create(
@@ -44,32 +68,20 @@ def img_to_text(uploaded_file: UploadedFile) -> str:
                 "content": [
                     {
                         "type": "input_text",
-                        "text": "Extract all the crossword clues from this image, return them as plain text separated by line breaks."
+                        "text": prompt,
                     },
                     {
                         "type": "input_image",
-                        "image_url": f"data:image/jpeg;base64,{base64_image}"
-                    }
+                        "image_url": f"data:image/jpeg;base64,{base64_image}",
+                    },
                 ],
             }
         ],
     )
-    return response.output_text
+    return json.loads(response.output_text)
 
-# -----------------------------
-# CLEAN AND SPLIT CLUES
-# -----------------------------
-def clean_and_split_clues(text: str) -> list[str]:
-    """
-    Remove unwanted headings and symbols from OCR text, then split it into individual clues.
-    """
-    text = text.replace("ORIZZONTALI", "").replace("VERTICALI", "").replace(":", "")
-    clues: list[str] = [line.strip() for line in text.split("\n") if line.strip()]
-    return clues
 
-# -----------------------------
-# WEB SCRAPING FOR ANSWERS
-# -----------------------------
+# Merged function to soup and find immediatley the given element
 def requestsoup_and_find(link: str, elem: str) -> Tag | None:
     """
     Fetch HTML content of a webpage and return the first occurrence of a given element.
@@ -78,6 +90,8 @@ def requestsoup_and_find(link: str, elem: str) -> Tag | None:
     soup: BeautifulSoup = BeautifulSoup(source, "html.parser")
     return soup.find(elem)
 
+
+# Web Scraping the dizy site to find teh response to a given clue
 def get_clue_response(clue: str) -> str | None:
     """
     Search dizy.com for the clue and return the first matching answer if found.
@@ -95,40 +109,42 @@ def get_clue_response(clue: str) -> str | None:
                     return answer.text
     return None
 
-def solve_clues(clues: list[str], bar=None) -> dict[str, str]:
+
+# Iterative function to loop all the finded clues given by the response of ChatGPT image model
+def solve_clues(clues: dict[str, dict[str, str]]) -> dict[str, dict[str, str]]:
     """
-    Solve multiple crossword clues and return a dictionary of {clue: answer}.
-    Optionally update a Streamlit progress bar.
+    Solve crossword clues given in the JSON-like format:
+    {
+        "Orizzontali": { "1": "clue text", "2": "clue text", ... },
+        "Verticali":   { "1": "clue text", "2": "clue text", ... }
+    }
+
+    Returns the same structure but with answers filled in:
+    {
+        "Orizzontali": { "1": "ANSWER", "2": "ANSWER", ... },
+        "Verticali":   { "1": "ANSWER", "2": "ANSWER", ... }
+    }
     """
-    answers: dict[str, str] = {}
-    increment: int = 0
-    add: int = 100 // len(clues) if clues else 0
+    solved: dict[str, dict[str, str]] = {"Orizzontali": {}, "Verticali": {}}
 
-    for i, phrase in enumerate(clues):
-        if bar is not None:
-            increment += add
-            bar.progress(increment, "Risolvendo le domande...")
+    for section, section_clues in clues.items():
+        for num, clue_text in section_clues.items():
+            answer: str | None = get_clue_response(clue_text)
+            if answer:
+                solved[section][num] = answer
 
-        answer: str | None = get_clue_response(phrase)
-        if answer:
-            answers[phrase] = answer
+    return solved
 
-    if bar is not None:
-        bar.progress(100, "Finito!")
 
-    return answers
-
-# -----------------------------
-# STREAMLIT APP
-# -----------------------------
-st.set_page_config(page_title="Crossword Solver", page_icon="icon.png", layout="centered")
+# Setup of the final Streamlit App
+st.set_page_config(
+    page_title="Crossword Solver", page_icon="icon.png", layout="centered"
+)
 st.title("Crosswords")
 
 phrase_tab, photo_tab = st.tabs(["Frase", "Foto"])
 
-# -----------------------------
-# PHOTO TAB
-# -----------------------------
+# Tab layout description for the photo feature
 with photo_tab:
     image: UploadedFile | None = st.camera_input(".", label_visibility="hidden")
     if image is not None:
@@ -137,26 +153,33 @@ with photo_tab:
     photo_button: bool = st.button("Analizza e cerca")
     if photo_button and image is not None:
         with st.spinner("Estraendo il testo..."):
-            text: str = img_to_text(image)
-            clues: list[str] = clean_and_split_clues(text)
+            text: dict[str, dict[str, str]] = img_to_text(image)  # returns dict format
 
-        bar = st.progress(0, "Risolvendo le domande...")
-        answers: dict[str, str] = solve_clues(clues, bar)
+        with st.spinner("Risolvendo le domande..."):
+            answers: dict[str, dict[str, str]] = solve_clues(text)
 
-        clue_col, answ_col = st.columns(2, gap="small")
-        clue_col.subheader("Domande")
-        answ_col.subheader("Risposte")
+        # Create 2 columns
+        horizontal_col, vertical_col = st.columns(2)
 
-        for clue, answer in answers.items():
-            clue_col.markdown(f"**{clue}**")
-            answ_col.markdown(f"**{answer}**")
+        # Show Orizzontali first
+        if "Orizzontali" in answers:
+            horizontal_col.markdown("### Orizzontali")
+            for num, ans in answers["Orizzontali"].items():
+                horizontal_col.markdown(f"**{num}.** **{ans}**")
 
-# -----------------------------
-# PHRASE TAB
-# -----------------------------
+        # Then Verticali
+        if "Verticali" in answers:
+            vertical_col.markdown("### Verticali")
+            for num, ans in answers["Verticali"].items():
+                vertical_col.markdown(f"**{num}.** **{ans}**")
+
+# Tab layout description for the much simplier single phrase query
 with phrase_tab:
     phrase: str = st.text_input(
-        ".", placeholder="Inserisci una domanda", max_chars=100, label_visibility="hidden"
+        ".",
+        placeholder="Inserisci una domanda",
+        max_chars=100,
+        label_visibility="hidden",
     )
     phrase_button: bool = st.button("Cerca")
     if phrase_button and phrase:
