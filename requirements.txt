@@ -22,7 +22,7 @@ jsonschema-specifications==2025.4.1
 MarkupSafe==3.0.2
 narwhals==2.3.0
 numpy==2.3.2
-openai==1.105.0
+openai==1.106.1
 packaging==25.0
 pandas==2.3.2
 pillow==11.3.0
