@@ -1,6 +1,6 @@
 altair==5.5.0
 annotated-types==0.7.0
-anyio==4.10.0
+anyio==4.11.0
 attrs==25.3.0
 beautifulsoup4==4.13.5
 blinker==1.9.0
@@ -22,7 +22,7 @@ jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.2
 narwhals==2.5.0
 numpy==2.3.3
-openai==1.108.1
+openai==1.109.0
 packaging==25.0
 pandas==2.3.2
 pillow==11.3.0
