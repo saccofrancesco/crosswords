@@ -4,12 +4,12 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 import base64
-from openai import OpenAI
+import openai
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import json
 
 # Creating and Configuring the OpenAI Client
-client: OpenAI = OpenAI(api_key=st.secrets["openai"]["api_key"])
+client: openai.OpenAI = openai.OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 # Crosswords' solutions site
 SITE: str = "https://www.dizy.com"
@@ -60,7 +60,7 @@ def img_to_text(uploaded_file: UploadedFile) -> dict[str, dict[str, str]]:
     Returns all detected text as formatted JSON like string.
     """
     base64_image: str = encode_uploaded_image(uploaded_file)
-    response = client.responses.create(
+    response: openai.types.responses.response.Response = client.responses.create(
         model="gpt-4.1",
         input=[
             {
@@ -78,6 +78,7 @@ def img_to_text(uploaded_file: UploadedFile) -> dict[str, dict[str, str]]:
             }
         ],
     )
+    print(type(response))
     return json.loads(response.output_text)
 
 
