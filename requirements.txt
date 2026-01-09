@@ -22,12 +22,12 @@ jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.3
 narwhals==2.15.0
 numpy==2.4.0
-openai==2.14.0
+openai==2.15.0
 packaging==25.0
 pandas==2.3.3
 pillow==12.1.0
 pip-review==1.3.0
-protobuf==6.33.2
+protobuf==6.33.3
 pyarrow==22.0.0
 pydantic==2.12.5
 pydantic_core==2.41.5
