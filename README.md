@@ -4,9 +4,7 @@
 </div>
 
 <div align="center">
-  <a href="https://www.buymeacoffee.com/YOUR_USERNAME">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
-  </a>
+  <a href="https://www.buymeacoffee.com/saccofrancesco"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=saccofrancesco&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" /></a>
 </div>
 
 <h4 align="center">A fast and intuitive crossword solver powered by <a href="https://platform.openai.com/docs/overview" target="_blank">OpenAI</a> and web scraping — built with <a href="https://streamlit.io" target="_blank">Streamlit</a>.</h4>
