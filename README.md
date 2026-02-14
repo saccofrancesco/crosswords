@@ -1,6 +1,6 @@
 <div align="center">
   <img src="icon.png" alt="Crosswords App" width="350">
-  <h1>🧩 Crosswords: Crossword Puzzle Answer Finder</h1>
+  <h1>Crosswords: Crossword Puzzle Answer Finder</h1>
 </div>
 
 <p align="center">
@@ -99,7 +99,7 @@ Crosswords uses these great tools:
 
 Explore more by the same author:
 
-* [SupremeBot](https://github.com/saccofrancesco/supreme-bot): A Supreme shopping bot built with [NiceGUI](https://nicegui.io).
+* [Supremebot](https://github.com/saccofrancesco/supreme-bot): A Supreme shopping bot built with [NiceGUI](https://nicegui.io).
 * [Lock](https://github.com/saccofrancesco/lock): A secure local password manager built with [CustomTkinter](https://customtkinter.tomschimansky.com/).
 
 ---
