@@ -1,6 +1,6 @@
 altair==6.0.0
 annotated-types==0.7.0
-anyio==4.12.1
+anyio==4.13.0
 attrs==26.1.0
 beautifulsoup4==4.14.3
 blinker==1.9.0
@@ -20,7 +20,7 @@ jiter==0.13.0
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.3
-narwhals==2.18.0
+narwhals==2.18.1
 numpy==2.4.3
 openai==2.29.0
 packaging==26.0
