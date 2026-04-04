@@ -7,7 +7,7 @@ blinker==1.9.0
 cachetools==7.0.5
 certifi==2026.2.25
 charset-normalizer==3.4.7
-click==8.3.1
+click==8.3.2
 distro==1.9.0
 gitdb==4.0.12
 GitPython==3.1.46
