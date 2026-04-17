@@ -31,7 +31,7 @@ protobuf==7.34.1
 pyarrow==23.0.1
 pydantic==2.12.5
 pydantic_core==2.41.5
-pydeck==0.9.1
+pydeck==0.9.2
 python-dateutil==2.9.0.post0
 pytz==2026.1.post1
 referencing==0.37.0
