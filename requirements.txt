@@ -4,7 +4,7 @@ anyio==4.13.0
 attrs==26.1.0
 beautifulsoup4==4.14.3
 blinker==1.9.0
-cachetools==7.1.0
+cachetools==7.1.1
 certifi==2026.4.22
 charset-normalizer==3.4.7
 click==8.3.3
@@ -36,7 +36,7 @@ pydantic_core==2.46.3
 pydeck==0.9.2
 python-dateutil==2.9.0.post0
 python-multipart==0.0.27
-pytz==2026.1.post1
+pytz==2026.2
 referencing==0.37.0
 requests==2.33.1
 rpds-py==0.30.0
