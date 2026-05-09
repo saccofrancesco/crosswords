@@ -22,7 +22,7 @@ jiter==0.14.0
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.3
-narwhals==2.20.0
+narwhals==2.21.0
 numpy==2.4.4
 openai==2.36.0
 packaging==26.2
