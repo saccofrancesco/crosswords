@@ -38,7 +38,7 @@ python-dateutil==2.9.0.post0
 python-multipart==0.0.28
 pytz==2026.2
 referencing==0.37.0
-requests==2.34.0
+requests==2.34.1
 rpds-py==0.30.0
 six==1.17.0
 smmap==5.0.3
@@ -54,5 +54,5 @@ typing-inspection==0.4.2
 typing_extensions==4.15.0
 tzdata==2026.2
 urllib3==2.7.0
-uvicorn==0.46.0
+uvicorn==0.47.0
 websockets==16.0
