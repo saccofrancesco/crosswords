@@ -4,10 +4,10 @@ anyio==4.13.0
 attrs==26.1.0
 beautifulsoup4==4.14.3
 blinker==1.9.0
-cachetools==7.1.1
+cachetools==7.1.2
 certifi==2026.4.22
 charset-normalizer==3.4.7
-click==8.3.3
+click==8.4.0
 distro==1.9.0
 gitdb==4.0.12
 GitPython==3.1.50
@@ -22,9 +22,9 @@ jiter==0.14.0
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.3
-narwhals==2.21.0
-numpy==2.4.4
-openai==2.36.0
+narwhals==2.21.2
+numpy==2.4.5
+openai==2.37.0
 packaging==26.2
 pandas==3.0.3
 pillow==12.2.0
