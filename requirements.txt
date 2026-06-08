@@ -48,7 +48,7 @@ starlette==1.2.1
 streamlit==1.58.0
 tenacity==9.1.4
 toml==0.10.2
-tornado==6.5.6
+tornado==6.5.7
 tqdm==4.68.1
 typing-inspection==0.4.2
 typing_extensions==4.15.0
