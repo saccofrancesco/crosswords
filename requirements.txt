@@ -1,4 +1,4 @@
-altair==6.2.1
+altair==6.2.2
 annotated-types==0.7.0
 anyio==4.14.0
 attrs==26.1.0
