@@ -1,13 +1,13 @@
 altair==6.2.2
 annotated-types==0.7.0
-anyio==4.14.0
+anyio==4.14.1
 attrs==26.1.0
 beautifulsoup4==4.15.0
 blinker==1.9.0
 cachetools==7.1.4
 certifi==2026.6.17
 charset-normalizer==3.4.7
-click==8.4.1
+click==8.4.2
 distro==1.9.0
 gitdb==4.0.12
 GitPython==3.1.50
@@ -24,7 +24,7 @@ jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.3
 narwhals==2.22.1
 numpy==2.5.0
-openai==2.43.0
+openai==2.44.0
 packaging==26.2
 pandas==3.0.3
 pillow==12.2.0
