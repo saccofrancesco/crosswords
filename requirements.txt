@@ -38,7 +38,7 @@ pydantic_core==2.46.4
 pydeck==0.9.3
 python-dateutil==2.9.0.post0
 python-multipart==0.0.32
-pytz==2026.4
+pytz==2026.5
 referencing==0.37.0
 requests==2.34.2
 rpds-py==2026.6.3
@@ -55,7 +55,7 @@ tqdm==4.70.1
 truststore==0.10.4
 typing-inspection==0.4.4
 typing_extensions==4.16.0
-tzdata==2026.4
+tzdata==2026.5
 urllib3==2.8.0
 uvicorn==0.54.0
 websockets==16.1.1
