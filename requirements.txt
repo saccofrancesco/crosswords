@@ -4,8 +4,8 @@ anyio==4.15.1
 attrs==26.1.0
 beautifulsoup4==4.15.0
 blinker==1.9.0
-cachetools==7.2.3
-certifi==2026.10.18
+cachetools==7.2.4
+certifi==2026.10.19
 charset-normalizer==3.5.2
 click==8.5.0
 distro==1.9.0
@@ -13,10 +13,10 @@ gitdb==4.0.12
 GitPython==3.2.1
 h11==0.16.0
 httpcore==1.0.9
-httpcore2==2.14.0
+httpcore2==2.15.1
 httptools==0.9.0
 httpx==0.28.1
-httpx2==2.14.0
+httpx2==2.15.1
 idna==3.20
 itsdangerous==2.2.0
 Jinja2==3.1.6
@@ -58,4 +58,4 @@ typing_extensions==4.16.0
 tzdata==2026.5
 urllib3==2.8.0
 uvicorn==0.54.0
-websockets==17.2
+websockets==17.3
