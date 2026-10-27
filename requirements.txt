@@ -4,7 +4,7 @@ anyio==4.15.1
 attrs==26.1.0
 beautifulsoup4==4.15.0
 blinker==1.9.0
-cachetools==7.2.5
+cachetools==7.2.6
 certifi==2026.10.23
 charset-normalizer==3.5.2
 click==8.5.0
@@ -26,7 +26,7 @@ jsonschema-specifications==2025.9.1
 MarkupSafe==3.0.4
 narwhals==2.27.1
 numpy==2.5.4
-openai==3.37.0
+openai==3.39.0
 packaging==26.3
 pandas==3.1.0
 pillow==13.0.0
