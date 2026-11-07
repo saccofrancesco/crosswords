@@ -33,8 +33,8 @@ pillow==13.0.0
 pip-review==1.3.0
 protobuf==7.36.2
 pyarrow==26.0.1
-pydantic==2.14.2
-pydantic_core==2.50.2
+pydantic==2.14.3
+pydantic_core==2.50.4
 pydeck==0.9.3
 python-dateutil==4.0.0
 python-multipart==0.0.33
@@ -47,7 +47,7 @@ smmap==5.0.3
 sniffio==1.3.1
 soupsieve==4.0.1
 starlette==1.10.0
-streamlit==1.66.1
+streamlit==1.67.0
 tenacity==9.2.1
 toml==0.10.2
 tornado==6.6
